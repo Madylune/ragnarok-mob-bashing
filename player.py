@@ -3,6 +3,7 @@ import pygame
 class Player(object):
   standing = pygame.image.load('assets/standing.png')
   dying = pygame.image.load('assets/Rdead.png')
+  sitting = pygame.image.load('assets/sitting.png')
   onHitRight = pygame.image.load('assets/RonHit.png')
   onHitLeft = pygame.image.load('assets/LonHit.png')
   walkRight = [pygame.image.load('assets/R1.png'), pygame.image.load('assets/R2.png'), pygame.image.load('assets/R3.png'), pygame.image.load('assets/R4.png'), pygame.image.load('assets/R5.png'), pygame.image.load('assets/R6.png'), pygame.image.load('assets/R7.png'), pygame.image.load('assets/R8.png')]
@@ -24,8 +25,9 @@ class Player(object):
     self.hitbox = (self.x + 17, self.y + 11, 29, 52)
     self.hitting = False
     self.hp = 100
-    self.sp = 50
+    self.sp = 100
     self.dead = False
+    self.isSitting = False
   
   def draw(self, window):
     # print('hp:', self.hp)
@@ -42,6 +44,8 @@ class Player(object):
         elif self.right:
           window.blit(self.walkRight[self.walkCount//3], (self.x,self.y))
           self.walkCount += 1
+      elif self.isSitting:
+        window.blit(self.sitting, (self.x, self.y + 20))
       elif self.hitting:
         if self.left:
           window.blit(self.onHitLeft, (self.x, self.y))
@@ -61,6 +65,7 @@ class Player(object):
     if self.hp > 0:
       self.hitting = True
       self.isJumping = False
+      self.isSitting = False
       self.jumpCount = 10
       self.y = 300
       self.walkCount = 0
