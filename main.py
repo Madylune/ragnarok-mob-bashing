@@ -65,45 +65,50 @@ while run:
 
   keys = pygame.key.get_pressed()
 
-  if keys[pygame.K_SPACE] and shootLoop == 0:
-    fireballSound.play()
-    fireball = Fireball(round(player.x + player.width//2), round(player.y + player.height//2), facing)
-    if len(bullets) < 5:
-      bullets.append(fireball)
-    shootLoop = 1
+  if not (player.dead):
+    if keys[pygame.K_SPACE] and shootLoop == 0:
+      player.hitting = False
+      fireballSound.play()
+      fireball = Fireball(round(player.x + player.width//2), round(player.y + player.height//2), facing)
+      if len(bullets) < 5:
+        bullets.append(fireball)
+      shootLoop = 1
 
-  if keys[pygame.K_LEFT] and player.x > player.speed:
-    player.x -= player.speed
-    player.left = True
-    player.right = False
-    player.standing = False
-    facing = -1
-  elif keys[pygame.K_RIGHT] and player.x < SCREEN_WIDTH - player.width - player.speed:
-    player.x += player.speed
-    player.left = False
-    player.right = True
-    player.standing = False
-    facing = 1
-  else:
-    player.standing = True
-    player.walkCount = 0
-  
-  if not (player.isJumping):
-    if keys[pygame.K_UP]:
-      player.isJumping = True
+    if keys[pygame.K_LEFT] and player.x > player.speed:
+      player.hitting = False
+      player.x -= player.speed
+      player.left = True
       player.right = False
+      player.standing = False
+      facing = -1
+    elif keys[pygame.K_RIGHT] and player.x < SCREEN_WIDTH - player.width - player.speed:
+      player.hitting = False
+      player.x += player.speed
       player.left = False
-      player.walkCount = 0
-  else:
-    if player.jumpCount >= -10:
-      neg = 1
-      if player.jumpCount < 0:
-        neg = -1
-      player.y -= (player.jumpCount ** 2) * 0.5 * neg
-      player.jumpCount -= 1
+      player.right = True
+      player.standing = False
+      facing = 1
     else:
-      player.isJumping = False
-      player.jumpCount = 10
+      player.standing = True
+      player.walkCount = 0
+    
+    if not (player.isJumping):
+      if keys[pygame.K_UP]:
+        player.hitting = False
+        player.isJumping = True
+        player.right = False
+        player.left = False
+        player.walkCount = 0
+    else:
+      if player.jumpCount >= -10:
+        neg = 1
+        if player.jumpCount < 0:
+          neg = -1
+        player.y -= (player.jumpCount ** 2) * 0.5 * neg
+        player.jumpCount -= 1
+      else:
+        player.isJumping = False
+        player.jumpCount = 10
 
   redrawGameWindow()
   
