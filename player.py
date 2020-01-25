@@ -1,13 +1,13 @@
 import pygame
 
 class Player(object):
-  standing = pygame.image.load('assets/standing.png')
-  dying = pygame.image.load('assets/Rdead.png')
-  sitting = pygame.image.load('assets/sitting.png')
-  onHitRight = pygame.image.load('assets/RonHit.png')
-  onHitLeft = pygame.image.load('assets/LonHit.png')
-  walkRight = [pygame.image.load('assets/R1.png'), pygame.image.load('assets/R2.png'), pygame.image.load('assets/R3.png'), pygame.image.load('assets/R4.png'), pygame.image.load('assets/R5.png'), pygame.image.load('assets/R6.png'), pygame.image.load('assets/R7.png'), pygame.image.load('assets/R8.png')]
-  walkLeft = [pygame.image.load('assets/L1.png'), pygame.image.load('assets/L2.png'), pygame.image.load('assets/L3.png'), pygame.image.load('assets/L4.png'), pygame.image.load('assets/L5.png'), pygame.image.load('assets/L6.png'), pygame.image.load('assets/L7.png'), pygame.image.load('assets/L8.png')]
+  standing = pygame.image.load('assets/player/standing.png')
+  dying = pygame.image.load('assets/player/Rdead.png')
+  sitting = pygame.image.load('assets/player/sitting.png')
+  onHitRight = pygame.image.load('assets/player/RonHit.png')
+  onHitLeft = pygame.image.load('assets/player/LonHit.png')
+  walkRight = [pygame.image.load('assets/player/R1.png'), pygame.image.load('assets/player/R2.png'), pygame.image.load('assets/player/R3.png'), pygame.image.load('assets/player/R4.png'), pygame.image.load('assets/player/R5.png'), pygame.image.load('assets/player/R6.png'), pygame.image.load('assets/player/R7.png'), pygame.image.load('assets/player/R8.png')]
+  walkLeft = [pygame.image.load('assets/player/L1.png'), pygame.image.load('assets/player/L2.png'), pygame.image.load('assets/player/L3.png'), pygame.image.load('assets/player/L4.png'), pygame.image.load('assets/player/L5.png'), pygame.image.load('assets/player/L6.png'), pygame.image.load('assets/player/L7.png'), pygame.image.load('assets/player/L8.png')]
 
 
   def __init__(self, x, y, width, height):

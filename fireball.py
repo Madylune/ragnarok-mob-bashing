@@ -1,8 +1,8 @@
 import pygame
 
 class Fireball(object):
-  imageRight = pygame.image.load('assets/Rfireball.png')
-  imageLeft = pygame.image.load('assets/Lfireball.png')
+  imageRight = pygame.image.load('assets/skill/Rfireball.png')
+  imageLeft = pygame.image.load('assets/skill/Lfireball.png')
   imageRight = pygame.transform.scale(imageRight, (50, 30))
   imageLeft = pygame.transform.scale(imageLeft, (50, 30))
 

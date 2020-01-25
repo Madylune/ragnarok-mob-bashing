@@ -1,4 +1,5 @@
 import pygame
+import random
 from player import Player
 from fireball import Fireball
 from monster import Monster
@@ -20,37 +21,49 @@ pygame.mixer.music.set_volume(0.1)
 
 fireballSound = pygame.mixer.Sound('sounds/fireball.wav')
 
+score = 0
 
 def redrawGameWindow():
   window.blit(bg, (0,0))
   player.draw(window)
-  mob.draw(window)
+  # mob.draw(window)
   hp.drawHp(window, player)
   text = font.render('HP', 1, (0,0,0))
   window.blit(text, (0,5))
   sp.drawSp(window, player)
   text = font.render('SP', 1, (0,0,0))
   window.blit(text, (0,30))
+  text = font.render('Score: ' + str(score), 1, (255,255,255))
+  window.blit(text, (690,10))
+
+  for mob in mobs:
+    mob.draw(window)
 
   for bullet in bullets:
     bullet.draw(window)
+
   pygame.display.update()
 
 # Main loop
 font = pygame.font.SysFont('comicsans', 27, True)
 run = True
 player = Player(300, 300, 64, 64)
-mob = Monster(200, 260, 120, 150, 500)
 hp = Bar(30, 5, 200, 20)
 sp = Bar(30, 30, 200, 20)
 bullets = []
 shootLoop = 0
 facing = -1
+mobs = []
+new_mob = Monster(random.randint(100, 500), 260, 120, 150, random.randint(500, 700))
+mobs.append(new_mob)
 
 while run:
   clock.tick(24)
 
+  #----- EVENTS ----#
   PLAYER_REGEN_SP = pygame.USEREVENT + 1
+  MONSTER_POP = pygame.USEREVENT + 2
+  pygame.time.set_timer(MONSTER_POP, random.randint(5000, 8000))
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
@@ -59,16 +72,23 @@ while run:
     elif event.type == PLAYER_REGEN_SP:
       if player.sp < 100 and player.sp < sp.width:
         player.sp += 10  
+    
+    elif event.type == MONSTER_POP:
+      new_mob = Monster(random.randint(100, 500), 260, 120, 150, random.randint(500, 700))
+      mobs.append(new_mob)
 
-  if mob.visible == True:
-    if player.hitbox[1] < mob.hitbox[1] + mob.hitbox[3] and player.hitbox[1] + player.hitbox[3] > mob.hitbox[1]:
-      if player.hitbox[0] + player.hitbox[2] > mob.hitbox[0] and player.hitbox[0] < mob.hitbox[0]+ mob.hitbox[2]:
-        player.hit(window)
+  for mob in mobs:
+    if mob.visible == True:
+      if player.hitbox[1] < mob.hitbox[1] + mob.hitbox[3] and player.hitbox[1] + player.hitbox[3] > mob.hitbox[1]:
+        if player.hitbox[0] + player.hitbox[2] > mob.hitbox[0] and player.hitbox[0] < mob.hitbox[0]+ mob.hitbox[2]:
+          player.hit(window)
+          score -= 5
 
   for bullet in bullets:
     if bullet.y < mob.hitbox[1] + mob.hitbox[3] and bullet.y > mob.hitbox[1]:
       if bullet.x > mob.hitbox[0] and bullet.x < mob.hitbox[0]+ mob.hitbox[2]:
         mob.hit()
+        score += 1
         bullets.pop(bullets.index(bullet))  
 
     if bullet.x < SCREEN_WIDTH and bullet.x > 0:
@@ -81,8 +101,8 @@ while run:
   if shootLoop > 3:
     shootLoop = 0
 
+  #----- KEYS PRESSED EVENTS ----#
   keys = pygame.key.get_pressed()
-
   if not (player.dead):
     if keys[pygame.K_SPACE] and shootLoop == 0:
       player.hitting = False
