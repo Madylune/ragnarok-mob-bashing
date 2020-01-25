@@ -16,8 +16,8 @@ class Monster(object):
     self.path = [self.x, self.end]
     self.walkCount = 0
     self.speed = 3
-    self.hitbox = (self.x + 17, self.y + 2, 31, 57)
-    self.health = 10
+    self.hitbox = (self.x, self.y, 100, 150) #(top left x, top left y, width, height)
+    self.health = 100
     self.visible = True
     self.hitting = False
 
@@ -34,15 +34,15 @@ class Monster(object):
           window.blit(self.onHitRight, (self.x, self.y))
       else:
         if self.speed > 0:
-          window.blit(self.walkRight[self.walkCount //3], (self.x, self.y))
+          window.blit(pygame.transform.scale(self.walkRight[self.walkCount //3], (120, 150)), (self.x, self.y))
           self.walkCount += 1 
         else:
-          window.blit(self.walkLeft[self.walkCount //3], (self.x, self.y))
+          window.blit(pygame.transform.scale(self.walkLeft[self.walkCount //3], (120, 150)), (self.x, self.y))
           self.walkCount += 1 
 
-      pygame.draw.rect(window, (255,0,0), (self.hitbox[0], self.hitbox[1] - 20, 50, 10))
-      pygame.draw.rect(window, (0,128,0), (self.hitbox[0], self.hitbox[1] - 20, 50 - (5 * (10 - self.health)), 10))
-      self.hitbox = (self.x + 17, self.y + 2, 31, 57)
+      pygame.draw.rect(window, (255,0,0), (self.hitbox[0], self.hitbox[1] - 20, 100, 10))
+      pygame.draw.rect(window, (0,128,0), (self.hitbox[0], self.hitbox[1] - 20,  self.health, 10))
+      self.hitbox = (self.x, self.y, 100, 150)
 
   def move(self):
     if self.speed > 0:
@@ -61,6 +61,6 @@ class Monster(object):
   def hit(self):
     # self.hitting = True
     if self.health > 0:
-      self.health -= 1
+      self.health -= 10
     else:
       self.visible = False

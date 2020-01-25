@@ -40,7 +40,7 @@ def redrawGameWindow():
 font = pygame.font.SysFont('comicsans', 27, True)
 run = True
 player = Player(300, 300, 64, 64)
-mob = Monster(200, 310, 64, 64, 500)
+mob = Monster(200, 260, 120, 150, 500)
 hp = Bar(30, 5, 200, 20)
 sp = Bar(30, 30, 200, 20)
 bullets = []
