@@ -22,7 +22,7 @@ class Player(object):
     self.standing = True
     self.walkCount = 0
     self.jumpCount = 10
-    self.hitbox = (self.x + 17, self.y + 11, 29, 52)
+    self.hitbox = (self.x, self.y, self.width, self.height)
     self.hitting = False
     self.hp = 100
     self.sp = 100
@@ -31,6 +31,7 @@ class Player(object):
   
   def draw(self, window):
     # print('hp:', self.hp)
+    # pygame.draw.rect(window, (255,0,0), self.hitbox, 2)
 
     if not (self.dead):
       # 8 images * 3 times each animation 
@@ -56,7 +57,7 @@ class Player(object):
           window.blit(self.walkRight[0], (self.x, self.y))
         else:
           window.blit(self.walkLeft[0], (self.x, self.y))
-      self.hitbox = (self.x + 17, self.y + 11, 29, 52)
+      self.hitbox = (self.x, self.y, self.width, self.height)
     else:
       window.blit(self.dying, (self.x, self.y))
 

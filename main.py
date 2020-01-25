@@ -3,6 +3,7 @@ import random
 from player import Player
 from fireball import Fireball
 from monster import Monster
+from boss import Boss
 from bar import Bar
 
 SCREEN_WIDTH = 800
@@ -47,14 +48,15 @@ def redrawGameWindow():
 # Main loop
 font = pygame.font.SysFont('comicsans', 27, True)
 run = True
-player = Player(300, 300, 64, 64)
+player = Player(300, 300, 45, 100)
+boss = Boss(random.randint(100, 500), 260, 120, 150, random.randint(500, 700))
 hp = Bar(30, 5, 200, 20)
 sp = Bar(30, 30, 200, 20)
 bullets = []
 shootLoop = 0
 facing = -1
 mobs = []
-new_mob = Monster(random.randint(100, 500), 260, 120, 150, random.randint(500, 700))
+new_mob = Monster(random.randint(100, 500), 300, 65, 100, random.randint(500, 700))
 mobs.append(new_mob)
 
 while run:
@@ -63,7 +65,6 @@ while run:
   #----- EVENTS ----#
   PLAYER_REGEN_SP = pygame.USEREVENT + 1
   MONSTER_POP = pygame.USEREVENT + 2
-  pygame.time.set_timer(MONSTER_POP, random.randint(5000, 8000))
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
@@ -74,7 +75,7 @@ while run:
         player.sp += 10  
     
     elif event.type == MONSTER_POP:
-      new_mob = Monster(random.randint(100, 500), 260, 120, 150, random.randint(500, 700))
+      new_mob = Monster(random.randint(100, 500), 300, 65, 100, random.randint(500, 700))
       mobs.append(new_mob)
 
   for mob in mobs:
@@ -105,6 +106,7 @@ while run:
   keys = pygame.key.get_pressed()
   if not (player.dead):
     if keys[pygame.K_SPACE] and shootLoop == 0:
+      pygame.time.set_timer(MONSTER_POP, 5000)
       player.hitting = False
       if player.sp > 0:
         fireballSound.play()
