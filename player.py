@@ -1,5 +1,7 @@
 import pygame
 
+SCREEN_WIDTH = 800
+
 class Player(object):
   standing = pygame.image.load('assets/player/standing.png')
   dying = pygame.image.load('assets/player/Rdead.png')
@@ -71,10 +73,10 @@ class Player(object):
       self.y = 300
       self.walkCount = 0
       self.hp -= 10
-      if self.right:
-        self.x -= 100
-      else: 
+      if self.left and self.x < (800 - self.width):
         self.x += 100
+      else:
+        self.x -= 100
     else:
       self.dead = True
 

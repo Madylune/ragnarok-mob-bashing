@@ -5,6 +5,7 @@ from fireball import Fireball
 from monster import Monster
 from boss import Boss
 from bar import Bar
+from potion import Potion
 
 SCREEN_WIDTH = 800
 
@@ -36,6 +37,7 @@ def redrawGameWindow():
   window.blit(text, (0,30))
   text = font.render('Score: ' + str(score), 1, (255,255,255))
   window.blit(text, (690,10))
+  potion.draw(window)
 
   for mob in mobs:
     mob.draw(window)
@@ -84,6 +86,8 @@ while run:
         if player.hitbox[0] + player.hitbox[2] > mob.hitbox[0] and player.hitbox[0] < mob.hitbox[0]+ mob.hitbox[2]:
           player.hit(window)
           score -= 5
+    else:
+      potion = Potion(mob.x, mob.y, 20, 20)
 
   for bullet in bullets:
     if bullet.y < mob.hitbox[1] + mob.hitbox[3] and bullet.y > mob.hitbox[1]:
@@ -106,7 +110,7 @@ while run:
   keys = pygame.key.get_pressed()
   if not (player.dead):
     if keys[pygame.K_SPACE] and shootLoop == 0:
-      pygame.time.set_timer(MONSTER_POP, 5000)
+      # pygame.time.set_timer(MONSTER_POP, 5000)
       player.hitting = False
       if player.sp > 0:
         fireballSound.play()
