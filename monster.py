@@ -15,7 +15,7 @@ class Monster(object):
     self.walkCount = 0
     self.speed = 3
     self.hitbox = (self.x, self.y, self.width, self.height) #(top left x, top left y, width, height)
-    self.health = 100
+    self.health = 50
     self.visible = True
     self.hitting = False
 
