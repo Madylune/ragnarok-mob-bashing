@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 
 class Monster(object):
   walkRight = [pygame.image.load('assets/mob/R1E1.png'), pygame.image.load('assets/mob/R2E1.png'), pygame.image.load('assets/mob/R3E1.png'), pygame.image.load('assets/mob/R4E1.png'), pygame.image.load('assets/mob/R5E1.png'), pygame.image.load('assets/mob/R6E1.png'), pygame.image.load('assets/mob/R7E1.png'), pygame.image.load('assets/mob/R8E1.png')]
@@ -60,6 +61,6 @@ class Monster(object):
   def hit(self):
     # self.hitting = True
     if self.health > 0:
-      self.health -= 10
+      self.health -= random.randint(10, 30)
     else:
       self.visible = False

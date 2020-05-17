@@ -1,10 +1,10 @@
 import pygame
 import random
-from player import Player
-from fireball import Fireball
-from monster import Monster
-from boss import Boss
-from bar import Bar
+from components.player import Player
+from components.fireball import Fireball
+from components.monster import Monster
+from components.boss import Boss
+from components.bar import Bar
 
 SCREEN_WIDTH = 800
 
@@ -16,9 +16,9 @@ clock = pygame.time.Clock()
 
 bg = pygame.image.load('assets/bg.jpg')
 
-music = pygame.mixer.music.load('sounds/prontera.mp3')
-pygame.mixer.music.play(-1) # -1 will ensure the song keeps looping
-pygame.mixer.music.set_volume(0.1)
+#music = pygame.mixer.music.load('sounds/prontera.mp3')
+#pygame.mixer.music.play(-1) # -1 will ensure the song keeps looping
+#pygame.mixer.music.set_volume(0.1)
 
 fireballSound = pygame.mixer.Sound('sounds/fireball.wav')
 
@@ -83,13 +83,14 @@ while run:
       if player.hitbox[1] < mob.hitbox[1] + mob.hitbox[3] and player.hitbox[1] + player.hitbox[3] > mob.hitbox[1]:
         if player.hitbox[0] + player.hitbox[2] > mob.hitbox[0] and player.hitbox[0] < mob.hitbox[0]+ mob.hitbox[2]:
           player.hit(window)
-          score -= 5
+      if mob.health <= 0:
+        score += 1
+        pygame.event.post(MONSTER_POP)
 
   for bullet in bullets:
     if bullet.y < mob.hitbox[1] + mob.hitbox[3] and bullet.y > mob.hitbox[1]:
       if bullet.x > mob.hitbox[0] and bullet.x < mob.hitbox[0]+ mob.hitbox[2]:
         mob.hit()
-        score += 1
         bullets.pop(bullets.index(bullet))  
 
     if bullet.x < SCREEN_WIDTH and bullet.x > 0:
@@ -106,12 +107,12 @@ while run:
   keys = pygame.key.get_pressed()
   if not (player.dead):
     if keys[pygame.K_SPACE] and shootLoop == 0:
-      pygame.time.set_timer(MONSTER_POP, 5000)
+      #pygame.time.set_timer(MONSTER_POP, 5000)
       player.hitting = False
       if player.sp > 0:
         fireballSound.play()
         fireball = Fireball(round(player.x + player.width//2), round(player.y + player.height//2), facing)
-        player.sp -= 15
+        player.sp -= 10
         if len(bullets) < 5:
           bullets.append(fireball)
         shootLoop = 1
