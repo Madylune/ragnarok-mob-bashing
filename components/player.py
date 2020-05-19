@@ -1,81 +1,64 @@
 import pygame
+from components.fireball import Fireball
+from components.lightbolt import Lightbolt
 
-class Player(object):
-  standing = pygame.image.load('assets/player/standing.png')
-  dying = pygame.image.load('assets/player/Rdead.png')
-  sitting = pygame.image.load('assets/player/sitting.png')
-  onHitRight = pygame.image.load('assets/player/RonHit.png')
-  onHitLeft = pygame.image.load('assets/player/LonHit.png')
-  walkRight = [pygame.image.load('assets/player/R1.png'), pygame.image.load('assets/player/R2.png'), pygame.image.load('assets/player/R3.png'), pygame.image.load('assets/player/R4.png'), pygame.image.load('assets/player/R5.png'), pygame.image.load('assets/player/R6.png'), pygame.image.load('assets/player/R7.png'), pygame.image.load('assets/player/R8.png')]
-  walkLeft = [pygame.image.load('assets/player/L1.png'), pygame.image.load('assets/player/L2.png'), pygame.image.load('assets/player/L3.png'), pygame.image.load('assets/player/L4.png'), pygame.image.load('assets/player/L5.png'), pygame.image.load('assets/player/L6.png'), pygame.image.load('assets/player/L7.png'), pygame.image.load('assets/player/L8.png')]
+class Player(pygame.sprite.Sprite):
+  def __init__(self, game):
+    super(Player, self).__init__()
+    self.images_right = []
+    self.images_right.append(pygame.image.load('assets/player/R1.png'))
+    self.images_right.append(pygame.image.load('assets/player/R2.png'))
+    self.images_right.append(pygame.image.load('assets/player/R3.png'))
+    self.images_right.append(pygame.image.load('assets/player/R4.png'))
+    self.images_right.append(pygame.image.load('assets/player/R5.png'))
+    self.images_right.append(pygame.image.load('assets/player/R6.png'))
+    self.images_right.append(pygame.image.load('assets/player/R7.png'))
+    self.images_right.append(pygame.image.load('assets/player/R8.png'))
 
+    self.images_left = []
+    self.images_left.append(pygame.image.load('assets/player/L1.png'))
+    self.images_left.append(pygame.image.load('assets/player/L2.png'))
+    self.images_left.append(pygame.image.load('assets/player/L3.png'))
+    self.images_left.append(pygame.image.load('assets/player/L4.png'))
+    self.images_left.append(pygame.image.load('assets/player/L5.png'))
+    self.images_left.append(pygame.image.load('assets/player/L6.png'))
+    self.images_left.append(pygame.image.load('assets/player/L7.png'))
+    self.images_left.append(pygame.image.load('assets/player/L8.png'))
 
-  def __init__(self, x, y, width, height):
-    self.x = x
-    self.y = y
-    self.width = width
-    self.height = height
-    self.speed = 5
-    self.isJumping = False
-    self.left = False
-    self.right = False
-    self.standing = True
-    self.walkCount = 0
-    self.jumpCount = 10
-    self.hitbox = (self.x, self.y, self.width, self.height)
-    self.hitting = False
-    self.hp = 100
-    self.sp = 100
-    self.dead = False
-    self.isSitting = False
-  
-  def draw(self, window):
-    # print('hp:', self.hp)
-    # pygame.draw.rect(window, (255,0,0), self.hitbox, 2)
+    #index value to get the image from the array, initially it is 0 
+    self.index = 0
+    self.image = self.images_right[self.index]
+    self.rect = pygame.Rect(350, 300, 45, 110)
+    self.velocity = 5 # Moving speed
+    self.attack = 10
+    self.all_spells = pygame.sprite.Group()
+    self.game = game
+    self.health = 100
+    self.max_health = 100
 
-    if not (self.dead):
-      # 8 images * 3 times each animation 
-      if self.walkCount + 1 >= 24: 
-        self.walkCount = 0
-
-      if not (self.standing):
-        if self.left:
-          window.blit(self.walkLeft[self.walkCount//3], (self.x,self.y)) #//: Résultat entier d'une division
-          self.walkCount += 1
-        elif self.right:
-          window.blit(self.walkRight[self.walkCount//3], (self.x,self.y))
-          self.walkCount += 1
-      elif self.isSitting:
-        window.blit(self.sitting, (self.x, self.y + 20))
-      elif self.hitting:
-        if self.left:
-          window.blit(self.onHitLeft, (self.x, self.y))
-        else:
-          window.blit(self.onHitRight, (self.x, self.y))
-      else:
-        if self.right:
-          window.blit(self.walkRight[0], (self.x, self.y))
-        else:
-          window.blit(self.walkLeft[0], (self.x, self.y))
-      self.hitbox = (self.x, self.y, self.width, self.height)
+  def damage(self, amount):
+    if self.health - amount > amount:
+      self.health -= amount
     else:
-      window.blit(self.dying, (self.x, self.y))
+      self.game.game_over()
 
+  def move_right(self):
+    self.rect.x += self.velocity 
+    self.index += 1
+    if self.index >= len(self.images_right):
+      self.index = 0
+    self.image = self.images_right[self.index]
 
-  def hit(self, window):
-    if self.hp > 0:
-      self.hitting = True
-      self.isJumping = False
-      self.isSitting = False
-      self.jumpCount = 10
-      self.y = 300
-      self.walkCount = 0
-      self.hp -= 10
-      if self.right:
-        self.x -= 100
-      else: 
-        self.x += 100
-    else:
-      self.dead = True
+  def move_left(self):
+    self.rect.x -= self.velocity
+    self.index += 1
+    if self.index >= len(self.images_left):
+      self.index = 0
+    self.image = self.images_left[self.index]
 
-    pygame.display.update()
+  def cast_spell(self, element):
+    if element == 'fire':
+      self.all_spells.add(Fireball(self))
+    if element == 'light':
+      self.all_spells.add(Lightbolt(self))
+    

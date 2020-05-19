@@ -1,19 +1,35 @@
 import pygame
 
-class Fireball(object):
-  imageRight = pygame.image.load('assets/skill/Rfireball.png')
-  imageLeft = pygame.image.load('assets/skill/Lfireball.png')
-  imageRight = pygame.transform.scale(imageRight, (50, 30))
-  imageLeft = pygame.transform.scale(imageLeft, (50, 30))
+class Fireball(pygame.sprite.Sprite):
+  def __init__(self, player):
+    super().__init__()
+    self.velocity = 10
+    self.player = player
+    self.image = pygame.image.load('assets/skill/fireball.png')
+    self.image = pygame.transform.scale(self.image, (30, 30))
+    self.rect = self.image.get_rect()
+    self.rect.x = player.rect.x + 20
+    self.rect.y = player.rect.y + 40
+    self.origin_image = self.image
+    self.angle = 0
 
-  def __init__(self,x,y,facing):
-    self.x = x
-    self.y = y
-    self.facing = facing
-    self.speed = 8 * facing
+  def rotate(self):
+    self.angle += 8
+    self.image = pygame.transform.rotozoom(self.origin_image, self.angle, 1)
+    self.rect = self.image.get_rect(center=self.rect.center)
 
-  def draw(self, window):
-    if self.facing == 1:
-      window.blit(self.imageRight, (self.x, self.y))
-    else:
-      window.blit(self.imageLeft, (self.x, self.y))
+  def remove(self):
+    self.player.all_spells.remove(self)
+
+  def move(self):
+    self.rect.x += self.velocity
+    self.rotate()
+
+    # Check collision with monster
+    for monster in self.player.game.check_collision(self, self.player.game.monsters_group):
+      self.remove()
+      monster.damage(self.player.attack)
+
+    # Remove projectile outside
+    if self.rect.x > 1080:
+      self.remove()

@@ -1,171 +1,38 @@
 import pygame
 import random
-from components.player import Player
-from components.fireball import Fireball
-from components.monster import Monster
-from components.boss import Boss
-from components.bar import Bar
-
-SCREEN_WIDTH = 800
+from components.game import Game
 
 pygame.init()
 
-window = pygame.display.set_mode((SCREEN_WIDTH,500))
+screen = pygame.display.set_mode((800, 500))
 pygame.display.set_caption("Ragnarok Online")
 clock = pygame.time.Clock()
+background_image = pygame.image.load('assets/bg.jpg')
 
-bg = pygame.image.load('assets/bg.jpg')
+game = Game()
+game_is_running = True
 
-#music = pygame.mixer.music.load('sounds/prontera.mp3')
-#pygame.mixer.music.play(-1) # -1 will ensure the song keeps looping
-#pygame.mixer.music.set_volume(0.1)
-
-fireballSound = pygame.mixer.Sound('sounds/fireball.wav')
-
-score = 0
-
-def redrawGameWindow():
-  window.blit(bg, (0,0))
-  player.draw(window)
-  # mob.draw(window)
-  hp.drawHp(window, player)
-  text = font.render('HP', 1, (0,0,0))
-  window.blit(text, (0,5))
-  sp.drawSp(window, player)
-  text = font.render('SP', 1, (0,0,0))
-  window.blit(text, (0,30))
-  text = font.render('Score: ' + str(score), 1, (255,255,255))
-  window.blit(text, (690,10))
-
-  for mob in mobs:
-    mob.draw(window)
-
-  for bullet in bullets:
-    bullet.draw(window)
-
-  pygame.display.update()
-
-# Main loop
-font = pygame.font.SysFont('comicsans', 27, True)
-run = True
-player = Player(300, 300, 45, 100)
-boss = Boss(random.randint(100, 500), 260, 120, 150, random.randint(500, 700))
-hp = Bar(30, 5, 200, 20)
-sp = Bar(30, 30, 200, 20)
-bullets = []
-shootLoop = 0
-facing = -1
-mobs = []
-new_mob = Monster(random.randint(100, 500), 300, 65, 100, random.randint(500, 700))
-mobs.append(new_mob)
-
-while run:
+while game_is_running:
   clock.tick(24)
-
-  #----- EVENTS ----#
-  PLAYER_REGEN_SP = pygame.USEREVENT + 1
-  MONSTER_POP = pygame.USEREVENT + 2
+  screen.blit(background_image, (0, 0))
+  game.update(screen)
+  # Update screen
+  pygame.display.flip()
 
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
-      run = False
+      game_is_running = False
+      pygame.quit()
 
-    elif event.type == PLAYER_REGEN_SP:
-      if player.sp < 100 and player.sp < sp.width:
-        player.sp += 10  
+    elif event.type == pygame.KEYDOWN:
+      game.pressed[event.key] = True
+      if event.key == pygame.K_a:
+        game.player.cast_spell('fire')
+      if event.key == pygame.K_z:
+        game.player.cast_spell('light')
+      if event.key == pygame.K_SPACE:
+        game.start()
+
+    elif event.type == pygame.KEYUP:
+      game.pressed[event.key] = False
     
-    elif event.type == MONSTER_POP:
-      new_mob = Monster(random.randint(100, 500), 300, 65, 100, random.randint(500, 700))
-      mobs.append(new_mob)
-
-  for mob in mobs:
-    if mob.visible == True:
-      if player.hitbox[1] < mob.hitbox[1] + mob.hitbox[3] and player.hitbox[1] + player.hitbox[3] > mob.hitbox[1]:
-        if player.hitbox[0] + player.hitbox[2] > mob.hitbox[0] and player.hitbox[0] < mob.hitbox[0]+ mob.hitbox[2]:
-          player.hit(window)
-      if mob.health <= 0:
-        score += 1
-        pygame.event.post(MONSTER_POP)
-
-  for bullet in bullets:
-    if bullet.y < mob.hitbox[1] + mob.hitbox[3] and bullet.y > mob.hitbox[1]:
-      if bullet.x > mob.hitbox[0] and bullet.x < mob.hitbox[0]+ mob.hitbox[2]:
-        mob.hit()
-        bullets.pop(bullets.index(bullet))  
-
-    if bullet.x < SCREEN_WIDTH and bullet.x > 0:
-      bullet.x += bullet.speed
-    else:
-      bullets.pop(bullets.index(bullet)) 
-
-  if shootLoop > 0:
-    shootLoop += 1
-  if shootLoop > 3:
-    shootLoop = 0
-
-  #----- KEYS PRESSED EVENTS ----#
-  keys = pygame.key.get_pressed()
-  if not (player.dead):
-    if keys[pygame.K_SPACE] and shootLoop == 0:
-      #pygame.time.set_timer(MONSTER_POP, 5000)
-      player.hitting = False
-      if player.sp > 0:
-        fireballSound.play()
-        fireball = Fireball(round(player.x + player.width//2), round(player.y + player.height//2), facing)
-        player.sp -= 10
-        if len(bullets) < 5:
-          bullets.append(fireball)
-        shootLoop = 1
-
-    if keys[pygame.K_LEFT] and player.x > player.speed:
-      pygame.time.set_timer(PLAYER_REGEN_SP, 0)
-      player.hitting = False
-      player.x -= player.speed
-      player.left = True
-      player.right = False
-      player.standing = False
-      player.isSitting = False
-      facing = -1
-    elif keys[pygame.K_RIGHT] and player.x < SCREEN_WIDTH - player.width - player.speed:
-      pygame.time.set_timer(PLAYER_REGEN_SP, 0)
-      player.hitting = False
-      player.x += player.speed
-      player.left = False
-      player.right = True
-      player.standing = False
-      player.isSitting = False
-      facing = 1
-    else:
-      player.standing = True
-      player.walkCount = 0
-    
-    if not (player.isJumping):
-      if keys[pygame.K_UP]:
-        player.hitting = False
-        player.isJumping = True
-        player.right = False
-        player.left = False
-        player.walkCount = 0
-        player.isSitting = False
-      elif keys[pygame.K_DOWN]:
-        pygame.time.set_timer(PLAYER_REGEN_SP, 1000)
-        player.hitting = False
-        player.isJumping = False
-        player.right = False
-        player.left = False
-        player.isSitting = True
-        player.walkCount = 0
-    else:
-      if player.jumpCount >= -10:
-        neg = 1
-        if player.jumpCount < 0:
-          neg = -1
-        player.y -= (player.jumpCount ** 2) * 0.5 * neg
-        player.jumpCount -= 1
-      else:
-        player.isJumping = False
-        player.jumpCount = 10
-
-  redrawGameWindow()
-  
-pygame.quit()
