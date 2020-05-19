@@ -5,6 +5,7 @@ from components.bar import Bar
 
 class Game:
   def __init__(self):
+    self.is_playing = False
     self.player = Player(self)
     self.players_group = pygame.sprite.Group(self.player)
     self.monsters_group = pygame.sprite.Group()
@@ -13,6 +14,7 @@ class Game:
     self.pressed = {}
 
   def start(self):
+    self.is_playing = True
     # Generate monsters when initialization
     self.spawn_monster()
     self.spawn_monster()
@@ -21,6 +23,7 @@ class Game:
     # Reset game
     self.monsters_group = pygame.sprite.Group()
     self.player.health = self.player.max_health
+    self.is_playing = False
 
   def update(self, screen):
     self.players_group.draw(screen)
