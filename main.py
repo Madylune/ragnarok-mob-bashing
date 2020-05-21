@@ -5,7 +5,7 @@ from components.game import Game
 pygame.init()
 
 screen = pygame.display.set_mode((800, 500))
-pygame.display.set_caption("Ragnarok Online")
+pygame.display.set_caption("Ragnarok Mob Bashing")
 clock = pygame.time.Clock()
 
 # Maps
@@ -14,12 +14,12 @@ payon_background_image = pygame.image.load('assets/maps/payon.jpg')
 payon_background_image = pygame.transform.scale(payon_background_image, (1200, 600))
 morroc_background_image = pygame.image.load('assets/maps/morroc.jpg')
 morroc_background_image = pygame.transform.scale(morroc_background_image, (1200, 700))
+starry_background_image = pygame.image.load('assets/maps/starry.jpg')
+starry_background_image = pygame.transform.scale(starry_background_image, (1000, 600))
 einbech_background_image = pygame.image.load('assets/maps/einbech.jpg')
 abyss_background_image = pygame.image.load('assets/maps/abyss.jpg')
 abyss_background_image = pygame.transform.scale(abyss_background_image, (1500, 900))
 odin_background_image = pygame.image.load('assets/maps/odin.jpg')
-starry_background_image = pygame.image.load('assets/maps/starry.jpg')
-starry_background_image = pygame.transform.scale(starry_background_image, (1000, 600))
 
 banner = pygame.image.load('assets/banner.png')
 banner_rect = banner.get_rect()
@@ -42,14 +42,14 @@ while game_is_running:
       screen.blit(payon_background_image, (0, 0))
     if game.current_level == 'morroc':
       screen.blit(morroc_background_image, (0, -100))
+    if game.current_level == 'starry':
+      screen.blit(starry_background_image, (0, -100))
     if game.current_level == 'einbech':
       screen.blit(einbech_background_image, (-150, -100))
     if game.current_level == 'abyss':
       screen.blit(abyss_background_image, (-300, -270))
     if game.current_level == 'odin':
       screen.blit(odin_background_image, (0, -220))
-    if game.current_level == 'starry':
-      screen.blit(starry_background_image, (0, -100))
     game.update(screen)
     
   else:

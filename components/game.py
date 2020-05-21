@@ -11,19 +11,21 @@ class Game:
     self.players_group = pygame.sprite.Group(self.player)
     self.monsters_group = pygame.sprite.Group()
     self.bar = Bar(self.player)
-    self.levels = ['payon', 'morroc', 'einbech', 'abyss', 'odin', 'starry']
+    self.levels = ['payon', 'morroc', 'starry', 'einbech', 'abyss', 'odin']
     self.index = 0
     self.current_level = self.levels[self.index]
     self.killed_monters = 0 
     # Get pressed keys
     self.pressed = {}
 
+  def pop_monsters(self):
+    self.spawn_monster(0)
+    # self.spawn_monster(1)
+    # self.spawn_monster(2)
+
   def start(self):
     self.is_playing = True
-    # Generate monsters when initialization
-    self.spawn_monster(0)
-    self.spawn_monster(1)
-    self.spawn_monster(2)
+    self.pop_monsters()
 
   def pass_level(self):
     self.index += 1
@@ -32,6 +34,8 @@ class Game:
     else:
       self.killed_monters = 0 
       self.current_level = self.levels[self.index]
+      self.monsters_group = pygame.sprite.Group()
+      self.pop_monsters()
 
   def game_over(self):
     # Reset game
@@ -43,7 +47,7 @@ class Game:
     self.players_group.draw(screen)
     self.bar.update_health_bar(screen)
 
-    if self.killed_monters >= 5:
+    if self.killed_monters >= 1:
       self.pass_level()
 
     # Player's moving
