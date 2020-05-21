@@ -21,7 +21,7 @@ class Game:
     self.is_playing = True
     # Generate monsters when initialization
     self.spawn_monster()
-    self.spawn_monster()
+    # self.spawn_monster()
 
   def pass_level(self):
     self.index += 1
