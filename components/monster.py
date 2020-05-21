@@ -34,6 +34,7 @@ class Monster(pygame.sprite.Sprite):
     self.health -= amount
     if self.health <= 0:
       self.respawn()
+      self.game.killed_monters += 1
 
   def update_health_bar(self, surface):
     pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 20, self.max_health, 7])
