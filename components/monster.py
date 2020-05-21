@@ -2,20 +2,18 @@ import pygame
 import random
 
 class Monster(pygame.sprite.Sprite):
-  def __init__(self, game):
+  def __init__(self, game, mob):
     super(Monster, self).__init__()
+    self.mob = mob
     self.images = []
-    self.images.append(pygame.image.load('assets/mobs/level1/mob3/L1.png'))
-    self.images.append(pygame.image.load('assets/mobs/level1/mob3/L1.png'))
-    self.images.append(pygame.image.load('assets/mobs/level1/mob3/L2.png'))
-    self.images.append(pygame.image.load('assets/mobs/level1/mob3/L2.png'))
-    self.images.append(pygame.image.load('assets/mobs/level1/mob3/L3.png'))
-    self.images.append(pygame.image.load('assets/mobs/level1/mob3/L3.png'))
-    self.images.append(pygame.image.load('assets/mobs/level1/mob3/L4.png'))
-    self.images.append(pygame.image.load('assets/mobs/level1/mob3/L4.png'))
-    # self.images.append(pygame.image.load('assets/level1/mob2/L5.png'))
-    # self.images.append(pygame.image.load('assets/level1/mob2/L6.png'))
-    # self.images.append(pygame.image.load('assets/level1/mob2/L7.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/mob' + str(mob) + '/L1.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/mob' + str(mob) + '/L1.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/mob' + str(mob) + '/L2.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/mob' + str(mob) + '/L2.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/mob' + str(mob) + '/L3.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/mob' + str(mob) + '/L3.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/mob' + str(mob) + '/L4.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/mob' + str(mob) + '/L4.png'))
 
     self.index = 0
     self.image = self.images[self.index]
@@ -23,14 +21,12 @@ class Monster(pygame.sprite.Sprite):
     self.game = game
     self.health = 100
     self.max_health = 100
-    # self.attack = 0.5 #bigfoot
-    # self.attack = 0.1 #poring 
-    self.attack = 0.3 #willow
+    self.mobs_attacks = [0.5, 0.1, 0.3] #bigfoot / poring / willow
+    self.attack = self.mobs_attacks[mob]
     self.rect = self.image.get_rect()
     self.rect.x = 800 + random.randint(0, 200)
-    # self.rect.y = 300 #bigfoot
-    # self.rect.y = 370 #poring
-    self.rect.y = 340  #willow
+    self.mobs_rect_y = [300, 370, 340]
+    self.rect.y = self.mobs_rect_y[mob]
     self.velocity = random.randint(1, 3)
 
   def respawn(self):
@@ -45,12 +41,17 @@ class Monster(pygame.sprite.Sprite):
       self.game.killed_monters += 1
 
   def update_health_bar(self, surface):
-    # pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 20, self.max_health, 7]) #bigfoot
-    # pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 20, self.health, 7]) #bigfoot
-    # pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7]) #poring
-    # pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7]) #poring
-    pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7]) #willow
-    pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7]) #willow
+    if self.mob == 0: #bigfoot
+      pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 20, self.max_health, 7])
+      pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 20, self.health, 7])
+
+    if self.mob == 1: #poring
+      pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
+      pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
+
+    if self.mob == 2: #willow
+      pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
+      pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
 
   def forward(self):
     if not self.game.check_collision(self, self.game.players_group):

@@ -1,4 +1,5 @@
 import pygame
+import random
 from components.player import Player
 from components.monster import Monster
 from components.bar import Bar
@@ -20,8 +21,9 @@ class Game:
   def start(self):
     self.is_playing = True
     # Generate monsters when initialization
-    self.spawn_monster()
-    # self.spawn_monster()
+    self.spawn_monster(0)
+    self.spawn_monster(1)
+    self.spawn_monster(2)
 
   def pass_level(self):
     self.index += 1
@@ -64,6 +66,6 @@ class Game:
   def check_collision(self, sprite, group):
     return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
 
-  def spawn_monster(self):
-    monster = Monster(self)
+  def spawn_monster(self, mob):
+    monster = Monster(self, mob)
     self.monsters_group.add(monster)
