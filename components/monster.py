@@ -31,7 +31,7 @@ class Monster(pygame.sprite.Sprite):
     if self.game.current_level == 'morroc':
       self.mobs_rect_y = [330, 370, 320]
     if self.game.current_level == 'starry':
-      self.mobs_rect_y = [330, 370, 320]
+      self.mobs_rect_y = [330, 340, 340]
       
     self.rect.y = self.mobs_rect_y[mob]
     self.velocity = random.randint(1, 3)
