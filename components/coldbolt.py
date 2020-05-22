@@ -1,12 +1,13 @@
 import pygame
 
-class Lightbolt(pygame.sprite.Sprite):
+class Coldbolt(pygame.sprite.Sprite):
   def __init__(self, player):
     super().__init__()
     self.velocity = 15
     self.player = player
-    self.image = pygame.image.load('assets/skill/lightbolt.png')
-    self.image = pygame.transform.scale(self.image, (100, 100))
+    self.image = pygame.image.load('assets/skill/coldbolt.png')
+    self.image = pygame.transform.scale(self.image, (20, 80))
+    self.image = pygame.transform.rotate(self.image, 20)
     self.rect = self.image.get_rect()
     self.rect.x = player.rect.x + 100
     self.rect.y = player.rect.y - 250
@@ -16,6 +17,7 @@ class Lightbolt(pygame.sprite.Sprite):
 
   def move(self):
     self.rect.y += self.velocity
+    self.rect.x += (self.velocity - 10)
 
     # Check collision with monster
     for monster in self.player.game.check_collision(self, self.player.game.monsters_group):

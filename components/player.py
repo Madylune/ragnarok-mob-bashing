@@ -1,6 +1,7 @@
 import pygame
 from components.fireball import Fireball
 from components.lightbolt import Lightbolt
+from components.coldbolt import Coldbolt
 
 class Player(pygame.sprite.Sprite):
   def __init__(self, game):
@@ -62,4 +63,6 @@ class Player(pygame.sprite.Sprite):
       self.all_spells.add(Fireball(self))
     if element == 'light':
       self.all_spells.add(Lightbolt(self))
+    if element == 'ice':
+      self.all_spells.add(Coldbolt(self))
     

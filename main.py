@@ -43,6 +43,12 @@ skill_button_light_rect = skill_button_light.get_rect()
 skill_button_light_rect.x = math.ceil(screen.get_width() / 2.5) + 40
 skill_button_light_rect.y = 1
 
+skill_button_ice = pygame.image.load('assets/cold_btn.png')
+skill_button_ice = pygame.transform.scale(skill_button_ice, (30, 30))
+skill_button_ice_rect = skill_button_ice.get_rect()
+skill_button_ice_rect.x = math.ceil(screen.get_width() / 2.5) + 80
+skill_button_ice_rect.y = 1
+
 game = Game()
 game_is_running = True
 
@@ -65,12 +71,15 @@ while game_is_running:
 
     screen.blit(skill_button_fire, skill_button_fire_rect)
     screen.blit(skill_button_light, skill_button_light_rect)
+    screen.blit(skill_button_ice, skill_button_ice_rect)
 
     font = pygame.font.SysFont('comicsans', 20, True)
     skill_fire_text = font.render('(A)', 1, (255,255,255))
     screen.blit(skill_fire_text, (skill_button_fire_rect.x + 7, skill_button_fire_rect.y + 32))
     skill_light_text = font.render('(Z)', 1, (255,255,255))
     screen.blit(skill_light_text, (skill_button_light_rect.x + 7, skill_button_light_rect.y + 32))
+    skill_ice_text = font.render('(E)', 1, (255,255,255))
+    screen.blit(skill_ice_text, (skill_button_ice_rect.x + 7, skill_button_ice_rect.y + 32))
 
     game.update(screen)
     
@@ -93,6 +102,8 @@ while game_is_running:
         game.player.cast_spell('fire')
       if event.key == pygame.K_z:
         game.player.cast_spell('light')
+      if event.key == pygame.K_e:
+        game.player.cast_spell('ice')
 
     elif event.type == pygame.KEYUP:
       game.pressed[event.key] = False
