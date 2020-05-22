@@ -34,6 +34,9 @@ class Monster(pygame.sprite.Sprite):
       self.mobs_rect_y = [330, 340, 340] #obeaune / thara / marc
     if self.game.current_level == 'einbech':
       self.mobs_rect_y = [350, 370, 310] #giearth / metaling / pitman
+    if self.game.current_level == 'abyss':
+      self.mobs_rect_y = [330, 310, 310] #ancient mimic / green ferus / red ferus
+    
       
     self.rect.y = self.mobs_rect_y[mob]
     self.velocity = random.randint(1, 3)
@@ -54,27 +57,31 @@ class Monster(pygame.sprite.Sprite):
       if self.game.current_level == 'payon': #bigfoot
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 20, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 20, self.health, 7])
-      if self.game.current_level == 'morroc': #muka
+      elif self.game.current_level == 'morroc': #muka
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
-      if self.game.current_level == 'starry' or self.game.current_level == 'einbech': #obeaune + giearth
+      elif self.game.current_level == 'abyss': #ancient mimic
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x + 15, self.rect.y - 20, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x + 15, self.rect.y - 20, self.health, 7])
+      else: #obeaune + giearth
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
-      
 
-    if self.mob == 1: #poring
-      pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
-      pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
-
-    if self.mob == 2: #willow
-      pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
-      pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
-    if self.mob == 2: #pitman
-      if self.game.current_level == 'einbech':
+    if self.mob == 1: #poring, drops, thara, metaling
+      if self.game.current_level == 'abyss':
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
-      pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
-      pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
+      else:
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
+
+    if self.mob == 2:
+      if self.game.current_level == 'einbech' or self.game.current_level == 'abyss': #pitman
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
+      else: #willow, peco, marc
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
 
   def forward(self):
     if not self.game.check_collision(self, self.game.players_group):
