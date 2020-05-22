@@ -20,8 +20,8 @@ class Game:
 
   def pop_monsters(self):
     self.spawn_monster(0)
-    # self.spawn_monster(1)
-    # self.spawn_monster(2)
+    self.spawn_monster(1)
+    self.spawn_monster(2)
 
   def start(self):
     self.is_playing = True

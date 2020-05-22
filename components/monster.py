@@ -36,6 +36,8 @@ class Monster(pygame.sprite.Sprite):
       self.mobs_rect_y = [350, 370, 310] #giearth / metaling / pitman
     if self.game.current_level == 'abyss':
       self.mobs_rect_y = [330, 310, 310] #ancient mimic / green ferus / red ferus
+    if self.game.current_level == 'odin':
+      self.mobs_rect_y = [310, 370, 300] #skogul / skeggiold / plasma
     
       
     self.rect.y = self.mobs_rect_y[mob]
@@ -67,16 +69,16 @@ class Monster(pygame.sprite.Sprite):
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
 
-    if self.mob == 1: #poring, drops, thara, metaling
-      if self.game.current_level == 'abyss':
+    if self.mob == 1:
+      if self.game.current_level == 'abyss': #green ferus
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
-      else:
+      else: #poring, drops, thara, metaling
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
 
     if self.mob == 2:
-      if self.game.current_level == 'einbech' or self.game.current_level == 'abyss': #pitman
+      if self.game.current_level == 'einbech' or self.game.current_level == 'abyss': #pitman, red ferus
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
       else: #willow, peco, marc
