@@ -29,34 +29,34 @@ class Monster(pygame.sprite.Sprite):
     self.mobs_rect_y = []
 
     if self.game.current_level == 'payon':
-      self.mobs_rect_y = [300, 370, 340] #bigfoot / poring / willow
-      self.mobs_attacks = [0.5, 0.1, 0.2] #bigfoot / poring / willow
-      self.mobs_elements = ['fire', 'wind', 'fire']
+      self.mobs_rect_y = [300, 370, 340, 350] #bigfoot / poring / willow / spore
+      self.mobs_attacks = [0.5, 0.1, 0.2, 0.3] 
+      self.mobs_elements = ['fire', 'wind', 'fire', 'wind']
 
     if self.game.current_level == 'morroc':
-      self.mobs_rect_y = [330, 370, 320] #muka / drops / peco
-      self.mobs_attacks = [0.5, 0.1, 0.5]
-      self.mobs_elements = ['fire', 'water', 'water']
+      self.mobs_rect_y = [330, 370, 320, 340] #muka / drops / peco / wolf
+      self.mobs_attacks = [0.5, 0.1, 0.5, 0.7]
+      self.mobs_elements = ['fire', 'water', 'water', 'fire']
 
     if self.game.current_level == 'starry':
-      self.mobs_rect_y = [330, 340, 340] #obeaune / thara / marc
-      self.mobs_attacks = [0.8, 0.4, 0.7]
-      self.mobs_elements = ['wind', 'wind', 'wind']
+      self.mobs_rect_y = [330, 340, 340, 190] #obeaune / thara / marc / strouf
+      self.mobs_attacks = [0.8, 0.4, 0.7, 1]
+      self.mobs_elements = ['wind', 'wind', 'wind', 'wind']
 
     if self.game.current_level == 'einbech':
-      self.mobs_rect_y = [350, 370, 310] #giearth / metaling / pitman
-      self.mobs_attacks = [0.7, 0.5, 1]
-      self.mobs_elements = ['fire', 'fire', 'fire']
+      self.mobs_rect_y = [350, 370, 310, 360] #giearth / metaling / pitman / teddy bear
+      self.mobs_attacks = [0.7, 0.5, 1, 1.5]
+      self.mobs_elements = ['fire', 'fire', 'fire', 'neutral']
 
     if self.game.current_level == 'abyss':
-      self.mobs_rect_y = [330, 310, 310] #ancient mimic / green ferus / red ferus
-      self.mobs_attacks = [1, 1.5, 1.5]
-      self.mobs_elements = ['neutral', 'fire', 'water']
+      self.mobs_rect_y = [330, 310, 310, 275] #ancient mimic / green ferus / red ferus / hydrolancer
+      self.mobs_attacks = [1, 1.5, 1.5, 3]
+      self.mobs_elements = ['neutral', 'fire', 'water', 'holy']
 
     if self.game.current_level == 'odin':
-      self.mobs_rect_y = [310, 370, 300] #skogul / skeggiold / plasma
-      self.mobs_attacks = [2, 3, 1.5]
-      self.mobs_elements = ['holy', 'dark', 'water']
+      self.mobs_rect_y = [310, 370, 300, 300] #skogul / skeggiold / plasma / frus
+      self.mobs_attacks = [2, 3, 1.5, 2]
+      self.mobs_elements = ['holy', 'dark', 'water', 'holy']
     
     self.attack = self.mobs_attacks[mob]
     self.rect.y = self.mobs_rect_y[mob]
@@ -93,7 +93,7 @@ class Monster(pygame.sprite.Sprite):
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
 
-    if self.mob == 1:
+    elif self.mob == 1:
       if self.game.current_level == 'abyss': #green ferus
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
@@ -101,13 +101,27 @@ class Monster(pygame.sprite.Sprite):
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
 
-    if self.mob == 2:
+    elif self.mob == 2:
       if self.game.current_level == 'einbech' or self.game.current_level == 'abyss': #pitman, red ferus
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
       else: #willow, peco, marc, plasma
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
+
+    elif self.mob == 3:
+      if self.game.current_level == 'payon': #spore
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
+      elif self.game.current_level == 'einbech': #teddy
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
+      elif self.game.current_level == 'abyss': #hydro
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x + 15, self.rect.y - 15, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x + 15, self.rect.y - 15, self.health, 7])
+      else: #wolf, strouf
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
 
   def forward(self):
     if not self.game.check_collision(self, self.game.players_group):

@@ -22,6 +22,7 @@ class Game:
     self.spawn_monster(0)
     self.spawn_monster(1)
     self.spawn_monster(2)
+    self.spawn_monster(3)
 
   def start(self):
     self.is_playing = True
@@ -47,7 +48,7 @@ class Game:
     self.players_group.draw(screen)
     self.bar.update_health_bar(screen)
 
-    if self.killed_monters >= 10:
+    if self.killed_monters >= 5:
       self.pass_level()
 
     # Player's moving
