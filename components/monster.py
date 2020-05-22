@@ -24,29 +24,43 @@ class Monster(pygame.sprite.Sprite):
     self.rect = self.image.get_rect()
     self.rect.x = 800 + random.randint(0, 100)
 
+    self.mobs_elements = []
     self.mobs_attacks = [] 
     self.mobs_rect_y = []
+
     if self.game.current_level == 'payon':
       self.mobs_rect_y = [300, 370, 340] #bigfoot / poring / willow
       self.mobs_attacks = [0.5, 0.1, 0.2] #bigfoot / poring / willow
+      self.mobs_elements = ['fire', 'wind', 'fire']
+
     if self.game.current_level == 'morroc':
       self.mobs_rect_y = [330, 370, 320] #muka / drops / peco
       self.mobs_attacks = [0.5, 0.1, 0.5]
+      self.mobs_elements = ['fire', 'water', 'water']
+
     if self.game.current_level == 'starry':
       self.mobs_rect_y = [330, 340, 340] #obeaune / thara / marc
       self.mobs_attacks = [0.8, 0.4, 0.7]
+      self.mobs_elements = ['wind', 'wind', 'wind']
+
     if self.game.current_level == 'einbech':
       self.mobs_rect_y = [350, 370, 310] #giearth / metaling / pitman
       self.mobs_attacks = [0.7, 0.5, 1]
+      self.mobs_elements = ['fire', 'fire', 'fire']
+
     if self.game.current_level == 'abyss':
       self.mobs_rect_y = [330, 310, 310] #ancient mimic / green ferus / red ferus
       self.mobs_attacks = [1, 1.5, 1.5]
+      self.mobs_elements = ['neutral', 'fire', 'water']
+
     if self.game.current_level == 'odin':
       self.mobs_rect_y = [310, 370, 300] #skogul / skeggiold / plasma
       self.mobs_attacks = [2, 3, 1.5]
+      self.mobs_elements = ['holy', 'dark', 'water']
     
     self.attack = self.mobs_attacks[mob]
     self.rect.y = self.mobs_rect_y[mob]
+    self.element = self.mobs_elements[mob]
     self.velocity = random.randint(1, 5)
 
   def respawn(self):
@@ -54,8 +68,12 @@ class Monster(pygame.sprite.Sprite):
     self.velocity = random.randint(1, 3)
     self.health = self.max_health
 
-  def damage(self, amount):
-    self.health -= amount
+  def damage(self, amount, element):
+    if element == self.element:
+      self.health -= (amount * 2)
+    else:
+      self.health -= amount
+
     if self.health <= 0:
       self.respawn()
       self.game.killed_monters += 1

@@ -47,7 +47,7 @@ class Game:
     self.players_group.draw(screen)
     self.bar.update_health_bar(screen)
 
-    if self.killed_monters >= 1:
+    if self.killed_monters >= 10:
       self.pass_level()
 
     # Player's moving

@@ -61,8 +61,8 @@ class Player(pygame.sprite.Sprite):
   def cast_spell(self, element):
     if element == 'fire':
       self.all_spells.add(Fireball(self))
-    if element == 'light':
+    if element == 'wind':
       self.all_spells.add(Lightbolt(self))
-    if element == 'ice':
+    if element == 'water':
       self.all_spells.add(Coldbolt(self))
     

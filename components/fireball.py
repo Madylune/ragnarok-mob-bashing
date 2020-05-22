@@ -28,7 +28,7 @@ class Fireball(pygame.sprite.Sprite):
     # Check collision with monster
     for monster in self.player.game.check_collision(self, self.player.game.monsters_group):
       self.remove()
-      monster.damage(self.player.attack)
+      monster.damage(self.player.attack, 'fire')
 
     # Remove projectile outside
     if self.rect.x > 800:

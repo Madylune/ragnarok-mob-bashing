@@ -101,9 +101,9 @@ while game_is_running:
       if event.key == pygame.K_a:
         game.player.cast_spell('fire')
       if event.key == pygame.K_z:
-        game.player.cast_spell('light')
+        game.player.cast_spell('wind')
       if event.key == pygame.K_e:
-        game.player.cast_spell('ice')
+        game.player.cast_spell('water')
 
     elif event.type == pygame.KEYUP:
       game.pressed[event.key] = False
