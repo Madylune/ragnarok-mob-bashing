@@ -27,11 +27,13 @@ class Monster(pygame.sprite.Sprite):
     self.rect.x = 800 + random.randint(0, 100)
     self.mobs_rect_y = []
     if self.game.current_level == 'payon':
-      self.mobs_rect_y = [300, 370, 340]
+      self.mobs_rect_y = [300, 370, 340] #bigfoot / poring / willow
     if self.game.current_level == 'morroc':
-      self.mobs_rect_y = [330, 370, 320]
+      self.mobs_rect_y = [330, 370, 320] #muka / drops / peco
     if self.game.current_level == 'starry':
-      self.mobs_rect_y = [330, 340, 340]
+      self.mobs_rect_y = [330, 340, 340] #obeaune / thara / marc
+    if self.game.current_level == 'einbech':
+      self.mobs_rect_y = [350, 370, 310] #giearth / metaling / pitman
       
     self.rect.y = self.mobs_rect_y[mob]
     self.velocity = random.randint(1, 3)
@@ -55,7 +57,7 @@ class Monster(pygame.sprite.Sprite):
       if self.game.current_level == 'morroc': #muka
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
-      if self.game.current_level == 'starry': #obeaune
+      if self.game.current_level == 'starry' or self.game.current_level == 'einbech': #obeaune + giearth
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
       
@@ -65,6 +67,12 @@ class Monster(pygame.sprite.Sprite):
       pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
 
     if self.mob == 2: #willow
+      pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
+      pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
+    if self.mob == 2: #pitman
+      if self.game.current_level == 'einbech':
+        pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
+        pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
       pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
       pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
 
