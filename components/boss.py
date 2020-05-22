@@ -24,23 +24,19 @@ class Boss(pygame.sprite.Sprite):
 
     self.rect = self.image.get_rect()
     self.rect.x = 800
-    self.rect.y = 270
+    self.rect.y = 250
 
     self.health = 200
     self.max_health = 200
     self.velocity = 0.1
     self.attack = 2
     self.defense = 2
-    self.element = 'water'
 
   def die(self):
     self.game.boss_group.remove(self)
 
   def damage(self, amount, element):
-    if element == self.element:
-      self.health -= ((amount * 2) / self.defense)
-    else:
-      self.health -= (amount / self.defense)
+    self.health -= (amount / self.defense)
 
     if self.health <= 0:
       self.game.killed_boss += 1

@@ -44,7 +44,6 @@ class Game:
       self.pop_monsters()
 
   def game_over(self):
-    # Reset game
     self.monsters_group = pygame.sprite.Group()
     self.boss_group = pygame.sprite.Group()
     self.player.health = self.player.max_health
@@ -55,7 +54,6 @@ class Game:
     self.bar.update_health_bar(screen)
 
     if self.killed_monters >= 5 and len(self.boss_group) < 1:
-      self.monsters_group = pygame.sprite.Group()
       self.spawn_boss()
 
     if self.killed_boss == 1:

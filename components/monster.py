@@ -64,7 +64,7 @@ class Monster(pygame.sprite.Sprite):
     self.velocity = random.randint(1, 5)
 
   def respawn(self):
-    self.rect.x = 1000 + random.randint(0, 300)
+    self.rect.x = 800 + random.randint(0, 300)
     self.velocity = random.randint(1, 3)
     self.health = self.max_health
 
@@ -122,8 +122,11 @@ class Monster(pygame.sprite.Sprite):
       else: #wolf, strouf
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
-
+  
   def forward(self):
+    if self.rect.x < 0:
+      self.respawn()
+
     if not self.game.check_collision(self, self.game.players_group):
       self.rect.x -= self.velocity
       self.index += 1
