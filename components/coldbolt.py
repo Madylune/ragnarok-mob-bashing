@@ -23,6 +23,10 @@ class Coldbolt(pygame.sprite.Sprite):
     for monster in self.player.game.check_collision(self, self.player.game.monsters_group):
       self.remove()
       monster.damage(self.player.attack, 'water')
+      
+    for monster in self.player.game.check_collision(self, self.player.game.boss_group):
+      self.remove()
+      monster.damage(self.player.attack, 'water')
 
     # Remove projectile outside
     if self.rect.x > 800:

@@ -22,6 +22,10 @@ class Lightbolt(pygame.sprite.Sprite):
       self.remove()
       monster.damage(self.player.attack, 'wind')
 
+    for monster in self.player.game.check_collision(self, self.player.game.boss_group):
+      self.remove()
+      monster.damage(self.player.attack, 'wind')
+
     # Remove projectile outside
     if self.rect.x > 800:
       self.remove()

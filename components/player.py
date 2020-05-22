@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
       self.game.game_over()
 
   def move_right(self):
-    if not self.game.check_collision(self, self.game.monsters_group):
+    if not self.game.check_collision(self, self.game.monsters_group) or not self.game.check_collision(self, self.game.boss_group):
       self.rect.x += self.velocity 
       self.index += 1
       if self.index >= len(self.images_right):
