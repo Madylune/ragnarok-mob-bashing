@@ -31,6 +31,18 @@ play_button_rect = play_button.get_rect()
 play_button_rect.x = math.ceil(screen.get_width() / 3)
 play_button_rect.y = math.ceil(screen.get_height() / 1.5)
 
+skill_button_fire = pygame.image.load('assets/fire_btn.png')
+skill_button_fire = pygame.transform.scale(skill_button_fire, (30, 30))
+skill_button_fire_rect = skill_button_fire.get_rect()
+skill_button_fire_rect.x = math.ceil(screen.get_width() / 2.5)
+skill_button_fire_rect.y = 1
+
+skill_button_light = pygame.image.load('assets/light_btn.png')
+skill_button_light = pygame.transform.scale(skill_button_light, (30, 30))
+skill_button_light_rect = skill_button_light.get_rect()
+skill_button_light_rect.x = math.ceil(screen.get_width() / 2.5) + 40
+skill_button_light_rect.y = 1
+
 game = Game()
 game_is_running = True
 
@@ -50,6 +62,16 @@ while game_is_running:
       screen.blit(abyss_background_image, (-300, -270))
     if game.current_level == 'odin':
       screen.blit(odin_background_image, (0, -220))
+
+    screen.blit(skill_button_fire, skill_button_fire_rect)
+    screen.blit(skill_button_light, skill_button_light_rect)
+
+    font = pygame.font.SysFont('comicsans', 20, True)
+    skill_fire_text = font.render('(A)', 1, (255,255,255))
+    screen.blit(skill_fire_text, (skill_button_fire_rect.x + 7, skill_button_fire_rect.y + 32))
+    skill_light_text = font.render('(Z)', 1, (255,255,255))
+    screen.blit(skill_light_text, (skill_button_light_rect.x + 7, skill_button_light_rect.y + 32))
+
     game.update(screen)
     
   else:
