@@ -24,7 +24,7 @@ class Boss(pygame.sprite.Sprite):
 
     self.rect = self.image.get_rect()
     self.rect.x = 800
-    self.rect.y = 250
+    self.rect.y = 260
 
     self.health = 200
     self.max_health = 200
@@ -43,8 +43,8 @@ class Boss(pygame.sprite.Sprite):
       self.die()
 
   def update_health_bar(self, surface):
-    pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 35, self.rect.y - 20, self.max_health, 7])
-    pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 35, self.rect.y - 20, self.health, 7])
+    pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 30, self.rect.y - 20, self.max_health, 7])
+    pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 30, self.rect.y - 20, self.health, 7])
 
   def forward(self):
     if not self.game.check_collision(self, self.game.players_group):
