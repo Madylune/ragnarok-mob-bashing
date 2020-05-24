@@ -38,22 +38,22 @@ class Monster(pygame.sprite.Sprite):
       self.mobs_attacks = [0.5, 0.1, 0.5, 0.7]
       self.mobs_elements = ['fire', 'water', 'water', 'fire']
 
-    if self.game.current_level == 'starry':
+    if self.game.current_level == 'island':
       self.mobs_rect_y = [330, 340, 340, 190] #obeaune / thara / marc / strouf
       self.mobs_attacks = [0.8, 0.4, 0.7, 1]
       self.mobs_elements = ['wind', 'wind', 'wind', 'wind']
 
-    if self.game.current_level == 'einbech':
+    if self.game.current_level == 'yuno':
       self.mobs_rect_y = [350, 370, 310, 360] #giearth / metaling / pitman / teddy bear
       self.mobs_attacks = [0.7, 0.5, 1, 1.5]
       self.mobs_elements = ['fire', 'fire', 'fire', 'neutral']
 
-    if self.game.current_level == 'abyss':
+    if self.game.current_level == 'veins':
       self.mobs_rect_y = [330, 310, 310, 275] #ancient mimic / green ferus / red ferus / hydrolancer
       self.mobs_attacks = [1, 1.5, 1.5, 3]
       self.mobs_elements = ['neutral', 'fire', 'water', 'holy']
 
-    if self.game.current_level == 'odin':
+    if self.game.current_level == 'abbeye':
       self.mobs_rect_y = [310, 370, 300, 300] #skogul / skeggiold / plasma / frus
       self.mobs_attacks = [2, 3, 1.5, 2]
       self.mobs_elements = ['holy', 'dark', 'water', 'holy']
@@ -86,7 +86,7 @@ class Monster(pygame.sprite.Sprite):
       elif self.game.current_level == 'morroc': #muka
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
-      elif self.game.current_level == 'abyss': #ancient mimic
+      elif self.game.current_level == 'veins': #ancient mimic
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x + 15, self.rect.y - 20, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x + 15, self.rect.y - 20, self.health, 7])
       else: #obeaune, giearth, skoguld
@@ -94,7 +94,7 @@ class Monster(pygame.sprite.Sprite):
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
 
     elif self.mob == 1:
-      if self.game.current_level == 'abyss': #green ferus
+      if self.game.current_level == 'veins': #green ferus
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
       else: #poring, drops, thara, metaling, skeggiold
@@ -102,7 +102,7 @@ class Monster(pygame.sprite.Sprite):
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
 
     elif self.mob == 2:
-      if self.game.current_level == 'einbech' or self.game.current_level == 'abyss': #pitman, red ferus
+      if self.game.current_level == 'yuno' or self.game.current_level == 'veins': #pitman, red ferus
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x, self.rect.y - 15, self.health, 7])
       else: #willow, peco, marc, plasma
@@ -113,10 +113,10 @@ class Monster(pygame.sprite.Sprite):
       if self.game.current_level == 'payon': #spore
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 20, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 20, self.rect.y - 15, self.health, 7])
-      elif self.game.current_level == 'einbech': #teddy
+      elif self.game.current_level == 'yuno': #teddy
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x - 25, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x - 25, self.rect.y - 15, self.health, 7])
-      elif self.game.current_level == 'abyss': #hydro
+      elif self.game.current_level == 'veins': #hydro
         pygame.draw.rect(surface, (60, 63, 60), [self.rect.x + 15, self.rect.y - 15, self.max_health, 7])
         pygame.draw.rect(surface, (111, 210, 46), [self.rect.x + 15, self.rect.y - 15, self.health, 7])
       else: #wolf, strouf

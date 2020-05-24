@@ -13,9 +13,10 @@ class Game:
     self.monsters_group = pygame.sprite.Group()
     self.boss_group = pygame.sprite.Group()
     self.bar = Bar(self.player)
-    self.levels = ['payon', 'morroc', 'starry', 'einbech', 'abyss', 'odin']
-    self.index = 0
-    self.current_level = self.levels[self.index]
+    self.levels = ['payon', 'morroc', 'geffen', 'island', 'yuno', 'veins', 'abbeye']
+    self.level_index = 0
+    self.map_index = 1
+    self.current_level = self.levels[self.level_index]
     self.killed_monters = 0 
     self.killed_boss = 0
     # Get pressed keys
@@ -29,16 +30,23 @@ class Game:
 
   def start(self):
     self.is_playing = True
-    self.pop_monsters()
+    # self.pop_monsters()
 
-  def pass_level(self):
-    self.index += 1
-    if self.index >= len(self.levels):
+  def next_map(self):
+    self.map_index += 1
+    self.killed_monters = 0
+    if self.map_index > 3:
+      self.next_level()
+
+  def next_level(self):
+    self.map_index = 1
+    self.level_index += 1
+    if self.level_index >= len(self.levels):
       self.game_over()
     else:
       self.killed_monters = 0
       self.killed_boss = 0
-      self.current_level = self.levels[self.index]
+      self.current_level = self.levels[self.level_index]
       self.monsters_group = pygame.sprite.Group()
       self.boss_group = pygame.sprite.Group()
       self.pop_monsters()
@@ -53,7 +61,10 @@ class Game:
     self.players_group.draw(screen)
     self.bar.update_health_bar(screen)
 
-    if self.killed_monters >= 5 and len(self.boss_group) < 1:
+    if self.map_index <= 3 and self.killed_monters >= 5:
+      self.next_map()
+
+    if self.map_index == 3 and self.killed_monters >= 5 and len(self.boss_group) < 1:
       self.spawn_boss()
 
     if self.killed_boss == 1:
