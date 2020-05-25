@@ -37,6 +37,18 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['fire', 'wind', 'fire', 'wind']
         self.mobs_health_bar_rect_x = [-10, -25, -20, -20]
         self.mobs_health_bar_rect_y = [-20, -15, -15, -15]
+      if self.game.map_index == 2:
+        self.mobs_rect_y = [325, 320, 290, 350] #zombie / skeleton / sohee / ninetail
+        self.mobs_attacks = [0.2, 0.4, 0.5, 0.5] 
+        self.mobs_elements = ['fire', 'fire', 'wind', 'water']
+        self.mobs_health_bar_rect_x = [-20, -20, 0, -20]
+        self.mobs_health_bar_rect_y = [-20, -15, -15, -15]
+      if self.game.map_index == 3:
+        self.mobs_rect_y = [300, 360, 365, 345] #rocker / argos / smokie / baphometJr
+        self.mobs_attacks = [0.3, 0.5, 0.4, 0.7] 
+        self.mobs_elements = ['fire', 'neutral', 'fire', 'holy']
+        self.mobs_health_bar_rect_x = [-20, -10, -20, -20]
+        self.mobs_health_bar_rect_y = [-20, -20, -15, -15]
 
     if self.game.current_level == 'morroc':
       if self.game.map_index == 1:

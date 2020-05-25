@@ -15,7 +15,7 @@ class Game:
     self.bar = Bar(self.player)
     self.levels = ['payon', 'morroc', 'geffen', 'island', 'yuno', 'veins', 'abbeye']
     self.level_index = 0
-    self.map_index = 1
+    self.map_index = 3
     self.current_level = self.levels[self.level_index]
     self.killed_monters = 0 
     self.killed_boss = 0
@@ -24,9 +24,10 @@ class Game:
 
   def pop_monsters(self):
     self.spawn_monster(0)
-    self.spawn_monster(1)
-    self.spawn_monster(2)
-    self.spawn_monster(3)
+    # self.spawn_monster(1)
+    # self.spawn_monster(2)
+    # self.spawn_monster(3)
+    # self.spawn_boss()
 
   def start(self):
     self.is_playing = True
