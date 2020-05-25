@@ -6,18 +6,18 @@ class Boss(pygame.sprite.Sprite):
     self.game = game
 
     self.images = []
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L1.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L1.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L1.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L2.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L2.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L2.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L3.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L3.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L3.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L4.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L4.png'))
-    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/boss/L4.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L1.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L1.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L1.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L2.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L2.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L2.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L3.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L3.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L3.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L4.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L4.png'))
+    self.images.append(pygame.image.load('assets/mobs/' + game.current_level + '/' + game.current_level + str(game.map_index) + '/boss/L4.png'))
 
     self.index = 0
     self.image = self.images[self.index]

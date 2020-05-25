@@ -30,13 +30,19 @@ class Game:
 
   def start(self):
     self.is_playing = True
-    # self.pop_monsters()
+    self.pop_monsters()
 
   def next_map(self):
     self.map_index += 1
     self.killed_monters = 0
     if self.map_index > 3:
       self.next_level()
+    else:
+      self.killed_monters = 0
+      self.killed_boss = 0
+      self.monsters_group = pygame.sprite.Group()
+      self.boss_group = pygame.sprite.Group()
+      self.pop_monsters()
 
   def next_level(self):
     self.map_index = 1
@@ -62,13 +68,16 @@ class Game:
     self.bar.update_health_bar(screen)
 
     if self.map_index <= 3 and self.killed_monters >= 5:
-      self.next_map()
-
-    if self.map_index == 3 and self.killed_monters >= 5 and len(self.boss_group) < 1:
-      self.spawn_boss()
-
-    if self.killed_boss == 1:
-      self.pass_level()
+      if len(self.boss_group) < 1:
+        self.spawn_boss()
+      elif self.killed_boss == 1:
+        self.next_map()
+    
+    if self.map_index == 3 and self.killed_monters >= 5:
+      if len(self.boss_group) < 1:
+        self.spawn_boss()
+      elif self.killed_boss == 1:
+        self.pass_level()
 
     # Player's moving
     if self.pressed.get(pygame.K_RIGHT) and self.player.rect.x + self.player.rect.width < screen.get_width():
