@@ -57,6 +57,18 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['fire', 'water', 'water', 'fire']
         self.mobs_health_bar_rect_x = [-25, -25, -20, 0]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+      if self.game.map_index == 2:
+        self.mobs_rect_y = [365, 365, 365, 365] #andre / deniro / piere / vitata
+        self.mobs_attacks = [0.2, 0.2, 0.2, 0.5]
+        self.mobs_elements = ['fire', 'fire', 'fire', 'fire']
+        self.mobs_health_bar_rect_x = [-20, -20, -20, -20]
+        self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+      if self.game.map_index == 3:
+        self.mobs_rect_y = [250, 270, 320, 340] #anubis / minorous / mummy / verit
+        self.mobs_attacks = [1, 0.7, 0.9, 0.6]
+        self.mobs_elements = ['fire', 'water', 'fire', 'fire']
+        self.mobs_health_bar_rect_x = [10, 10, -15, -20]
+        self.mobs_health_bar_rect_y = [-15, -20, -15, -15]
 
     if self.game.current_level == 'island':
       if self.game.map_index == 1:
