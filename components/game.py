@@ -67,7 +67,7 @@ class Game:
     self.players_group.draw(screen)
     self.bar.update_health_bar(screen)
 
-    if self.map_index <= 3 and self.killed_monters >= 5:
+    if self.map_index <= 3 and self.killed_monters >= 3:
       if len(self.boss_group) < 1:
         self.spawn_boss()
       elif self.killed_boss == 1:
@@ -77,7 +77,7 @@ class Game:
       if len(self.boss_group) < 1:
         self.spawn_boss()
       elif self.killed_boss == 1:
-        self.pass_level()
+        self.next_level()
 
     # Player's moving
     if self.pressed.get(pygame.K_RIGHT) and self.player.rect.x + self.player.rect.width < screen.get_width():
