@@ -70,6 +70,26 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_health_bar_rect_x = [10, 10, -15, -20]
         self.mobs_health_bar_rect_y = [-15, -20, -15, -15]
 
+    if self.game.current_level == 'geffen':
+      if self.game.map_index == 1:
+        self.mobs_rect_y = [300, 380, 370, 350] #familiar / tarou / thief bug male / poison spore
+        self.mobs_attacks = [0.2, 0.2, 0.5, 0.6]
+        self.mobs_elements = ['holy', 'holy', 'holy', 'neutral']
+        self.mobs_health_bar_rect_x = [-20, -30, -20, -20]
+        self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+      if self.game.map_index == 2:
+        self.mobs_rect_y = [310, 320, 350, 320] #orc warrior / orc lady / orc baby / orc archer
+        self.mobs_attacks = [0.8, 0.8, 0.6, 0.9]
+        self.mobs_elements = ['fire', 'fire', 'fire', 'fire']
+        self.mobs_health_bar_rect_x = [-10, -10, -30, -20]
+        self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+      if self.game.map_index == 3:
+        self.mobs_rect_y = [305, 275, 140, 310] #dark priest / wraith / AK / raydric
+        self.mobs_attacks = [1.7, 1, 2.5, 1.5]
+        self.mobs_elements = ['fire', 'fire', 'holy', 'holy']
+        self.mobs_health_bar_rect_x = [-20, -20, 50, -25]
+        self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+
     if self.game.current_level == 'island':
       if self.game.map_index == 1:
         self.mobs_rect_y = [330, 340, 340, 190] #obeaune / thara / marc / strouf

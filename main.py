@@ -135,8 +135,8 @@ while game_is_running:
         screen.blit(geffen_map_1, geffen_map_1_position) #geffen1 - culvert
       elif game.map_index == 2:
         screen.blit(geffen_map_2, geffen_map_2_position) #geffen2 - orc village
-      elif game.map_index == 2:
-        screen.blit(geffen_map_3, geffen_map_3_position) #geffen2 - glast heim
+      elif game.map_index == 3:
+        screen.blit(geffen_map_3, geffen_map_3_position) #geffen3 - glast heim
 
     if game.current_level == 'island':
       if game.map_index == 1:
