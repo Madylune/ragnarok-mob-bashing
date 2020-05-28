@@ -151,6 +151,18 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_health_bar_rect_y = [-5, 0, 0, -15]
 
     if self.game.current_level == 'abbeye':
+      if self.game.map_index == 1:
+        self.mobs_rect_y = [290, 305, 340, 270] #gibbet / dullahan / lude / loli ruri
+        self.mobs_attacks = [0.7, 1.2, 0.5, 1.9]
+        self.mobs_elements = ['holy', 'fire', 'fire', 'holy']
+        self.mobs_health_bar_rect_x = [-5, -5, -20, -5]
+        self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+      if self.game.map_index == 2:
+        self.mobs_rect_y = [235, 265, 250, 235] #Zombie Slaughter / Flame Skull / Banshee / Necromancer
+        self.mobs_attacks = [2.5, 2, 2.7, 3]
+        self.mobs_elements = ['fire', 'ghost', 'holy', 'fire']
+        self.mobs_health_bar_rect_x = [30, 10, 20, 30]
+        self.mobs_health_bar_rect_y = [20, 10, -5, 10]
       if self.game.map_index == 3:
         self.mobs_rect_y = [310, 370, 300, 300] #skogul / skeggiold / plasma / frus
         self.mobs_attacks = [2, 3, 1.5, 2]
