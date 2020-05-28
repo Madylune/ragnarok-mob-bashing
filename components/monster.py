@@ -137,6 +137,18 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['neutral', 'fire', 'water', 'holy']
         self.mobs_health_bar_rect_x = [15, 0, 0, 15]
         self.mobs_health_bar_rect_y = [-20, -15, -15, -15]
+      if self.game.map_index == 2:
+        self.mobs_rect_y = [350, 270, 260, 260] #siroma / gazeti / snowier / ice titan
+        self.mobs_attacks = [1, 1.5, 1.8, 2.5]
+        self.mobs_elements = ['wind', 'wind', 'wind', 'wind']
+        self.mobs_health_bar_rect_x = [-5, 5, 10, 45]
+        self.mobs_health_bar_rect_y = [-15, -15, -5, -15]
+      if self.game.map_index == 3:
+        self.mobs_rect_y = [200, 280, 320, 305] #kasa / salamander / imp / kaho
+        self.mobs_attacks = [3, 3.5, 2.5, 2]
+        self.mobs_elements = ['water', 'water', 'water', 'water']
+        self.mobs_health_bar_rect_x = [25, 25, 0, -20]
+        self.mobs_health_bar_rect_y = [-5, 0, 0, -15]
 
     if self.game.current_level == 'abbeye':
       if self.game.map_index == 3:
