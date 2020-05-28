@@ -148,7 +148,7 @@ while game_is_running:
 
     if game.current_level == 'yuno':
       if game.map_index == 1:
-        screen.blit(payon_map_1, yuno_map_1_position) #yuno1
+        screen.blit(yuno_map_1, yuno_map_1_position) #yuno1
       elif game.map_index == 2:
         screen.blit(yuno_map_2, yuno_map_2_position) #yuno2 - einbech mine
       elif game.map_index ==3:

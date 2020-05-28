@@ -14,7 +14,7 @@ class Game:
     self.boss_group = pygame.sprite.Group()
     self.bar = Bar(self.player)
     self.levels = ['payon', 'morroc', 'geffen', 'island', 'yuno', 'veins', 'abbeye']
-    self.level_index = 4
+    self.level_index = 5
     self.map_index = 1
     self.current_level = self.levels[self.level_index]
     self.killed_monters = 0 

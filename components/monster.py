@@ -111,12 +111,24 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
 
     if self.game.current_level == 'yuno':
+      if self.game.map_index == 1:
+        self.mobs_rect_y = [350, 315, 240, 325] #geographer / grand peco / harpy / goat
+        self.mobs_attacks = [0.8, 0.9, 1.2, 1]
+        self.mobs_elements = ['fire', 'water', 'earth', 'water']
+        self.mobs_health_bar_rect_x = [-20, -10, 10, 0]
+        self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
       if self.game.map_index == 2:
         self.mobs_rect_y = [350, 370, 310, 360] #giearth / metaling / pitman / teddy bear
         self.mobs_attacks = [0.7, 0.5, 1, 1.5]
         self.mobs_elements = ['fire', 'fire', 'fire', 'neutral']
         self.mobs_health_bar_rect_x = [-20, -25, 0, -25]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+      if self.game.map_index == 3:
+        self.mobs_rect_y = [320, 350, 295, 295] #dimik / venatu / archdam / apocalypse
+        self.mobs_attacks = [2, 1.7, 1.9, 2.7]
+        self.mobs_elements = ['neutral', 'neutral', 'neutral', 'neutral']
+        self.mobs_health_bar_rect_x = [-5, -20, 0, 0]
+        self.mobs_health_bar_rect_y = [-15, -15, -5, -15]
 
     if self.game.current_level == 'veins':
       if self.game.map_index == 1:
