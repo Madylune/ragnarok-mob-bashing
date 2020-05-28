@@ -97,6 +97,18 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['wind', 'wind', 'wind', 'wind']
         self.mobs_health_bar_rect_x = [-20, -25, -20, 0]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+      if self.game.map_index == 2:
+        self.mobs_rect_y = [315, 320, 330, 340] #pirate skeleton / whisper / hydra / penomena
+        self.mobs_attacks = [1, 0.7, 0.5, 1.5]
+        self.mobs_elements = ['fire', 'ghost', 'wind', 'neutral']
+        self.mobs_health_bar_rect_x = [-20, -30, -15, -10]
+        self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+      if self.game.map_index == 3:
+        self.mobs_rect_y = [300, 315, 350, 335] #dragon tail / spring rabbit / freezer / permeter
+        self.mobs_attacks = [1.7, 1.6, 1.9, 1.9]
+        self.mobs_elements = ['earth', 'fire', 'wind', 'neutral']
+        self.mobs_health_bar_rect_x = [-15, -20, -15, -15]
+        self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
 
     if self.game.current_level == 'yuno':
       if self.game.map_index == 2:
