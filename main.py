@@ -42,8 +42,8 @@ geffen_map_3 = pygame.transform.scale(geffen_map_3, (1000, 600)) #geffen3 - glas
 geffen_map_3_position = (0, -100)
 
 island_map_1 = pygame.image.load('assets/maps/island/island1.jpg')
-island_map_1 = pygame.transform.scale(island_map_1, (1300, 900)) #byalan
-island_map_1_position = (-130, -50)
+island_map_1 = pygame.transform.scale(island_map_1, (800, 500)) #byalan
+island_map_1_position = (0, 0)
 island_map_2 = pygame.image.load('assets/maps/island/island2.jpg')
 island_map_2 = pygame.transform.scale(island_map_2, (900, 650)) #sunken ship
 island_map_2_position = (0, -150)
@@ -73,10 +73,10 @@ veins_map_3_position = (-50, -100)
 abbeye_map_1 = pygame.image.load('assets/maps/abbeye/abbeye1.jpg') 
 abbeye_map_1 = pygame.transform.scale(abbeye_map_1, (800, 600)) #abbeye1 - niflheim
 abbeye_map_1_position = (0, -100)
-abbeye_map_2 = pygame.image.load('assets/maps/abbeye/abbeye2.jpg')
+abbeye_map_2 = pygame.image.load('assets/maps/abbeye/abbeye2.jpg') #abbeye2 - nameless
 abbeye_map_2 = pygame.transform.scale(abbeye_map_2, (900, 700))
 abbeye_map_2_position = (0, -50)
-abbeye_map_3 = pygame.image.load('assets/maps/abbeye/abbeye3.jpg') #abbeye1 - odin temple
+abbeye_map_3 = pygame.image.load('assets/maps/abbeye/abbeye3.jpg') #abbeye3 - odin temple
 abbeye_map_3_position = (0, -220)
 
 banner = pygame.image.load('assets/banner.png')
