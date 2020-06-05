@@ -22,6 +22,8 @@ class Game:
     self.killed_monters = 0 
     self.killed_boss = 0
     self.points = 0
+    self.player_titles = ['mage', 'wizard', 'high wizard']
+    self.player_title = self.player_titles[0]
     # Get pressed keys
     self.pressed = {}
 
@@ -74,6 +76,13 @@ class Game:
     self.players_group.draw(screen)
     self.bar.update_health_bar(screen)
     self.bar.update_exp_bar(screen)
+
+    if self.player.level <= 2:
+      self.player_title = self.player_titles[0]
+    if self.player.level > 2 and self.player.level <= 5:
+      self.player_title = self.player_titles[1]
+    if self.player.level > 5:
+      self.player_title = self.player_titles[2]
 
     if self.map_index <= 3 and self.killed_monters >= MONSTERS_TO_KILL:
       if len(self.boss_group) < 1:

@@ -83,7 +83,7 @@ abbeye_map_3_position = (0, -220)
 banner = pygame.image.load('assets/banner.png')
 banner_rect = banner.get_rect()
 banner_rect.x = math.ceil(screen.get_width() / 4)
-banner_rect.y = 10
+banner_rect.y = 30
 
 play_button = pygame.image.load('assets/play.png')
 play_button_rect = play_button.get_rect()
@@ -181,6 +181,7 @@ while game_is_running:
       if game.map_index == 3:
         screen.blit(abbeye_map_3, abbeye_map_3_position) #abbeye3 - odin temple
 
+    # Skills bar
     screen.blit(skill_button_fire, skill_button_fire_rect)
     screen.blit(skill_button_light, skill_button_light_rect)
     screen.blit(skill_button_ice, skill_button_ice_rect)
@@ -193,9 +194,10 @@ while game_is_running:
     skill_ice_text = skills_font.render('(E)', 1, (255,255,255))
     screen.blit(skill_ice_text, (skill_button_ice_rect.x + 10, skill_button_ice_rect.y + 37))
 
-    exp_font = pygame.font.SysFont('comicsans', 23, True)
+    # Player infos
     screen.blit(player_avatar, player_avatar_rect)
-    exp_text = exp_font.render('LV.' + str(game.player.level), 1, (255,255,255))
+    exp_font = pygame.font.SysFont('comicsans', 23, True)
+    exp_text = exp_font.render('LV.' + str(game.player.level) + '  -  ' + game.player_title, 1, (255,255,255))
     screen.blit(exp_text, (player_avatar_rect.x + 10, player_avatar.get_height() + 15))
 
     game.update(screen)
