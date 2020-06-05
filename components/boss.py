@@ -137,7 +137,7 @@ class Boss(pygame.sprite.Sprite):
         self.rect.y = 230
         self.attack = 21
         self.health_bar_rect_x = -15
-        self.health_bar_rect_y = -20
+        self.health_bar_rect_y = -25
       if self.game.map_index == 2: #fallen bishop
         self.rect.y = 250
         self.attack = 22

@@ -3,6 +3,7 @@ import math
 from components.game import Game
 
 pygame.init()
+pygame.mixer.init()
 
 screen = pygame.display.set_mode((800, 500))
 pygame.display.set_caption("Ragnarok Mob Bashing")
@@ -114,6 +115,10 @@ while game_is_running:
   clock.tick(24)
 
   if game.is_playing:
+    if not pygame.mixer.music.get_busy():
+      pygame.mixer.music.load('assets/sounds/' + game.current_level + str(game.map_index) + '.wav')
+      pygame.mixer.music.play()
+
     if game.current_level == 'payon':
       if game.map_index == 1:
         screen.blit(payon_map_1, payon_map_1_position) #payon1
@@ -160,7 +165,7 @@ while game_is_running:
       elif game.map_index == 2:
         screen.blit(veins_map_2, veins_map_2_position) #veins2 - ice cave
       elif game.map_index == 3:
-        screen.blit(veins_map_3, veins_map_3_position) #veins2 - thor volcano
+        screen.blit(veins_map_3, veins_map_3_position) #veins3 - thor volcano
 
     if game.current_level == 'abbeye':
       if game.map_index == 1:
@@ -185,6 +190,9 @@ while game_is_running:
     game.update(screen)
     
   else:
+    if not pygame.mixer.music.get_busy():
+      pygame.mixer.music.load('assets/sounds/start.wav')
+      pygame.mixer.music.play()
     screen.blit(home_background_image, (0, -200))
     screen.blit(banner, banner_rect)
     screen.blit(play_button, play_button_rect)
