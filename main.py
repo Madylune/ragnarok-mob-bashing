@@ -123,7 +123,7 @@ while game_is_running:
   if game.is_playing:
     if not pygame.mixer.music.get_busy():
       pygame.mixer.music.load('assets/sounds/' + game.current_level + str(game.map_index) + '.wav')
-      # pygame.mixer.music.play()
+      pygame.mixer.music.play()
 
     if game.current_level == 'payon':
       if game.map_index == 1:
@@ -185,15 +185,18 @@ while game_is_running:
     screen.blit(skill_button_light, skill_button_light_rect)
     screen.blit(skill_button_ice, skill_button_ice_rect)
 
-    screen.blit(player_avatar, player_avatar_rect)
-
-    font = pygame.font.SysFont('comicsans', 20, True)
-    skill_fire_text = font.render('(A)', 1, (255,255,255))
+    skills_font = pygame.font.SysFont('comicsans', 20, True)
+    skill_fire_text = skills_font.render('(A)', 1, (255,255,255))
     screen.blit(skill_fire_text, (skill_button_fire_rect.x + 10, skill_button_fire_rect.y + 37))
-    skill_light_text = font.render('(Z)', 1, (255,255,255))
+    skill_light_text = skills_font.render('(Z)', 1, (255,255,255))
     screen.blit(skill_light_text, (skill_button_light_rect.x + 10, skill_button_light_rect.y + 37))
-    skill_ice_text = font.render('(E)', 1, (255,255,255))
+    skill_ice_text = skills_font.render('(E)', 1, (255,255,255))
     screen.blit(skill_ice_text, (skill_button_ice_rect.x + 10, skill_button_ice_rect.y + 37))
+
+    exp_font = pygame.font.SysFont('comicsans', 23, True)
+    screen.blit(player_avatar, player_avatar_rect)
+    exp_text = exp_font.render('LV.' + str(game.player.level), 1, (255,255,255))
+    screen.blit(exp_text, (player_avatar_rect.x + 10, player_avatar.get_height() + 15))
 
     game.update(screen)
     

@@ -24,6 +24,7 @@ class Monster(pygame.sprite.Sprite):
     self.rect = self.image.get_rect()
     self.rect.x = 800 + random.randint(0, 100)
 
+    self.mobs_points = []
     self.mobs_elements = []
     self.mobs_attacks = [] 
     self.mobs_rect_y = []
@@ -37,18 +38,21 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['fire', 'wind', 'fire', 'wind']
         self.mobs_health_bar_rect_x = [-10, -25, -20, -20]
         self.mobs_health_bar_rect_y = [-20, -15, -15, -15]
+        self.mobs_points = [50, 10, 60, 70]
       if self.game.map_index == 2:
         self.mobs_rect_y = [325, 320, 290, 350] #zombie / skeleton / sohee / ninetail
         self.mobs_attacks = [0.2, 0.4, 0.5, 0.5] 
         self.mobs_elements = ['fire', 'fire', 'wind', 'water']
         self.mobs_health_bar_rect_x = [-20, -20, 0, -20]
         self.mobs_health_bar_rect_y = [-20, -15, -15, -15]
+        self.mobs_points = [80, 60, 80, 80]
       if self.game.map_index == 3:
         self.mobs_rect_y = [300, 360, 365, 345] #rocker / argos / smokie / baphometJr
         self.mobs_attacks = [0.3, 0.5, 0.4, 0.7] 
         self.mobs_elements = ['fire', 'neutral', 'fire', 'holy']
         self.mobs_health_bar_rect_x = [-20, -10, -20, -20]
         self.mobs_health_bar_rect_y = [-20, -20, -15, -15]
+        self.mobs_points = [20, 50, 30, 80]
 
     if self.game.current_level == 'morroc':
       if self.game.map_index == 1:
@@ -57,18 +61,21 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['fire', 'water', 'water', 'fire']
         self.mobs_health_bar_rect_x = [-25, -25, -20, 0]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [80, 10, 70, 100]
       if self.game.map_index == 2:
         self.mobs_rect_y = [365, 365, 365, 365] #andre / deniro / piere / vitata
         self.mobs_attacks = [0.2, 0.2, 0.2, 0.5]
         self.mobs_elements = ['fire', 'fire', 'fire', 'fire']
         self.mobs_health_bar_rect_x = [-20, -20, -20, -20]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [20, 20, 20, 50]
       if self.game.map_index == 3:
         self.mobs_rect_y = [250, 270, 320, 340] #anubis / minorous / mummy / verit
         self.mobs_attacks = [1, 0.7, 0.9, 0.6]
         self.mobs_elements = ['fire', 'water', 'fire', 'fire']
         self.mobs_health_bar_rect_x = [10, 10, -15, -20]
         self.mobs_health_bar_rect_y = [-15, -20, -15, -15]
+        self.mobs_points = [150, 120, 100, 90]
 
     if self.game.current_level == 'geffen':
       if self.game.map_index == 1:
@@ -77,18 +84,22 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['holy', 'holy', 'holy', 'neutral']
         self.mobs_health_bar_rect_x = [-20, -30, -20, -20]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [30, 20, 50, 70]
+        
       if self.game.map_index == 2:
         self.mobs_rect_y = [310, 320, 350, 320] #orc warrior / orc lady / orc baby / orc archer
         self.mobs_attacks = [0.8, 0.8, 0.6, 0.9]
         self.mobs_elements = ['fire', 'fire', 'fire', 'fire']
         self.mobs_health_bar_rect_x = [-10, -10, -30, -20]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [80, 80, 70, 90]
       if self.game.map_index == 3:
         self.mobs_rect_y = [305, 275, 140, 310] #dark priest / wraith / AK / raydric
         self.mobs_attacks = [1.7, 1, 2.5, 1.5]
         self.mobs_elements = ['fire', 'fire', 'holy', 'holy']
         self.mobs_health_bar_rect_x = [-20, -20, 50, -25]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [120, 90, 150, 100]
 
     if self.game.current_level == 'island':
       if self.game.map_index == 1:
@@ -97,18 +108,21 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['wind', 'wind', 'wind', 'wind']
         self.mobs_health_bar_rect_x = [-20, -25, -20, 0]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [70, 50, 60, 90]
       if self.game.map_index == 2:
         self.mobs_rect_y = [315, 320, 330, 340] #pirate skeleton / whisper / hydra / penomena
         self.mobs_attacks = [1, 0.7, 0.5, 1.5]
         self.mobs_elements = ['fire', 'ghost', 'wind', 'neutral']
         self.mobs_health_bar_rect_x = [-20, -30, -15, -10]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [70, 30, 20, 80]
       if self.game.map_index == 3:
         self.mobs_rect_y = [300, 315, 350, 335] #dragon tail / spring rabbit / freezer / permeter
         self.mobs_attacks = [1.7, 1.6, 1.9, 1.9]
         self.mobs_elements = ['earth', 'fire', 'wind', 'neutral']
         self.mobs_health_bar_rect_x = [-15, -20, -15, -15]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [80, 80, 90, 90]
 
     if self.game.current_level == 'yuno':
       if self.game.map_index == 1:
@@ -117,18 +131,21 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['fire', 'water', 'earth', 'water']
         self.mobs_health_bar_rect_x = [-20, -10, 10, 0]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [70, 70, 80, 60]
       if self.game.map_index == 2:
         self.mobs_rect_y = [350, 370, 310, 360] #giearth / metaling / pitman / teddy bear
         self.mobs_attacks = [0.7, 0.5, 1, 1.5]
         self.mobs_elements = ['fire', 'fire', 'fire', 'neutral']
         self.mobs_health_bar_rect_x = [-20, -25, 0, -25]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [40, 40, 60, 80]
       if self.game.map_index == 3:
         self.mobs_rect_y = [320, 350, 295, 295] #dimik / venatu / archdam / apocalypse
         self.mobs_attacks = [2, 1.7, 1.9, 2.7]
         self.mobs_elements = ['neutral', 'neutral', 'neutral', 'neutral']
         self.mobs_health_bar_rect_x = [-5, -20, 0, 0]
         self.mobs_health_bar_rect_y = [-15, -15, -5, -15]
+        self.mobs_points = [100, 90, 120, 150]
 
     if self.game.current_level == 'veins':
       if self.game.map_index == 1:
@@ -137,18 +154,21 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['neutral', 'fire', 'water', 'holy']
         self.mobs_health_bar_rect_x = [15, 0, 0, 15]
         self.mobs_health_bar_rect_y = [-20, -15, -15, -15]
+        self.mobs_points = [100, 120, 120, 160]
       if self.game.map_index == 2:
         self.mobs_rect_y = [350, 270, 260, 260] #siroma / gazeti / snowier / ice titan
         self.mobs_attacks = [1, 1.5, 1.8, 2.5]
         self.mobs_elements = ['wind', 'wind', 'wind', 'wind']
         self.mobs_health_bar_rect_x = [-5, 5, 10, 45]
         self.mobs_health_bar_rect_y = [-15, -15, -5, -15]
+        self.mobs_points = [100, 110, 110, 120]
       if self.game.map_index == 3:
         self.mobs_rect_y = [200, 280, 320, 305] #kasa / salamander / imp / kaho
         self.mobs_attacks = [3, 3.5, 2.5, 2]
         self.mobs_elements = ['water', 'water', 'water', 'water']
         self.mobs_health_bar_rect_x = [25, 25, 0, -20]
         self.mobs_health_bar_rect_y = [-5, 0, 0, -15]
+        self.mobs_points = [120, 130, 100, 60]
 
     if self.game.current_level == 'abbeye':
       if self.game.map_index == 1:
@@ -157,19 +177,23 @@ class Monster(pygame.sprite.Sprite):
         self.mobs_elements = ['holy', 'fire', 'fire', 'holy']
         self.mobs_health_bar_rect_x = [-5, -5, -20, -5]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [50, 70, 30, 70]
       if self.game.map_index == 2:
         self.mobs_rect_y = [235, 265, 250, 235] #Zombie Slaughter / Flame Skull / Banshee / Necromancer
         self.mobs_attacks = [2.5, 2, 2.7, 3]
         self.mobs_elements = ['fire', 'ghost', 'holy', 'fire']
         self.mobs_health_bar_rect_x = [30, 10, 20, 30]
         self.mobs_health_bar_rect_y = [20, 10, -5, 10]
+        self.mobs_points = [120, 100, 130, 150]
       if self.game.map_index == 3:
         self.mobs_rect_y = [310, 370, 300, 300] #skogul / skeggiold / plasma / frus
         self.mobs_attacks = [2, 3, 1.5, 2]
         self.mobs_elements = ['holy', 'dark', 'water', 'holy']
         self.mobs_health_bar_rect_x = [-20, -25, -20, -20]
         self.mobs_health_bar_rect_y = [-15, -15, -15, -15]
+        self.mobs_points = [140, 150, 100, 140]
     
+    self.points = self.mobs_points[mob]
     self.attack = self.mobs_attacks[mob]
     self.rect.y = self.mobs_rect_y[mob]
     self.element = self.mobs_elements[mob]
@@ -191,6 +215,7 @@ class Monster(pygame.sprite.Sprite):
     if self.health <= 0:
       self.respawn()
       self.game.killed_monters += 1
+      self.game.player.update_exp(self.points)
 
   def update_health_bar(self, surface):
     pygame.draw.rect(surface, (60, 63, 60), [self.rect.x + self.health_bar_rect_x, self.rect.y + self.health_bar_rect_y, self.max_health, 7])

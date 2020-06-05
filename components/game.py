@@ -5,6 +5,8 @@ from components.monster import Monster
 from components.boss import Boss
 from components.bar import Bar
 
+MONSTERS_TO_KILL = 10
+
 class Game:
   def __init__(self):
     self.is_playing = False
@@ -19,6 +21,7 @@ class Game:
     self.current_level = self.levels[self.level_index]
     self.killed_monters = 0 
     self.killed_boss = 0
+    self.points = 0
     # Get pressed keys
     self.pressed = {}
 
@@ -70,14 +73,15 @@ class Game:
   def update(self, screen):
     self.players_group.draw(screen)
     self.bar.update_health_bar(screen)
+    self.bar.update_exp_bar(screen)
 
-    if self.map_index <= 3 and self.killed_monters >= 3:
+    if self.map_index <= 3 and self.killed_monters >= MONSTERS_TO_KILL:
       if len(self.boss_group) < 1:
         self.spawn_boss()
       elif self.killed_boss == 1:
         self.next_map()
     
-    if self.map_index == 3 and self.killed_monters >= 5:
+    if self.map_index == 3 and self.killed_monters >= MONSTERS_TO_KILL:
       if len(self.boss_group) < 1:
         self.spawn_boss()
       elif self.killed_boss == 1:

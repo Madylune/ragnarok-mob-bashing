@@ -36,6 +36,16 @@ class Player(pygame.sprite.Sprite):
     self.game = game
     self.health = 100
     self.max_health = 100
+    self.exp = 0
+    self.max_exp = 800
+    self.level = 1
+
+  def update_exp(self, amount):
+    if self.exp >= self.max_exp:
+      self.level += 1
+      self.exp = 0
+    else:
+      self.exp += amount
 
   def damage(self, amount):
     if self.health - amount > amount:
