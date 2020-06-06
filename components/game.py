@@ -10,6 +10,8 @@ MONSTERS_TO_KILL = 10
 class Game:
   def __init__(self):
     self.is_playing = False
+    self.player_titles = ['mage', 'wizard', 'high wizard']
+    self.player_title = self.player_titles[0]
     self.player = Player(self)
     self.players_group = pygame.sprite.Group(self.player)
     self.monsters_group = pygame.sprite.Group()
@@ -22,8 +24,6 @@ class Game:
     self.killed_monters = 0 
     self.killed_boss = 0
     self.points = 0
-    self.player_titles = ['mage', 'wizard', 'high wizard']
-    self.player_title = self.player_titles[0]
     # Get pressed keys
     self.pressed = {}
 
@@ -77,12 +77,14 @@ class Game:
     self.bar.update_health_bar(screen)
     self.bar.update_exp_bar(screen)
 
-    if self.player.level <= 2:
+    if self.player.level <= 1:
       self.player_title = self.player_titles[0]
-    if self.player.level > 2 and self.player.level <= 5:
+    if self.player.level > 1 and self.player.level <= 2:
       self.player_title = self.player_titles[1]
-    if self.player.level > 5:
+      self.player.swap_image('wizard')
+    if self.player.level > 2:
       self.player_title = self.player_titles[2]
+      self.player.swap_image('hw')
 
     if self.map_index <= 3 and self.killed_monters >= MONSTERS_TO_KILL:
       if len(self.boss_group) < 1:

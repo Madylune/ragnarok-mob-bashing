@@ -6,25 +6,15 @@ from components.coldbolt import Coldbolt
 class Player(pygame.sprite.Sprite):
   def __init__(self, game):
     super(Player, self).__init__()
+    self.game = game
+    self.title = 'hw' if self.game.player_title == 'high wizard' else self.game.player_title
     self.images_right = []
-    self.images_right.append(pygame.image.load('assets/player/R1.png'))
-    self.images_right.append(pygame.image.load('assets/player/R2.png'))
-    self.images_right.append(pygame.image.load('assets/player/R3.png'))
-    self.images_right.append(pygame.image.load('assets/player/R4.png'))
-    self.images_right.append(pygame.image.load('assets/player/R5.png'))
-    self.images_right.append(pygame.image.load('assets/player/R6.png'))
-    self.images_right.append(pygame.image.load('assets/player/R7.png'))
-    self.images_right.append(pygame.image.load('assets/player/R8.png'))
-
     self.images_left = []
-    self.images_left.append(pygame.image.load('assets/player/L1.png'))
-    self.images_left.append(pygame.image.load('assets/player/L2.png'))
-    self.images_left.append(pygame.image.load('assets/player/L3.png'))
-    self.images_left.append(pygame.image.load('assets/player/L4.png'))
-    self.images_left.append(pygame.image.load('assets/player/L5.png'))
-    self.images_left.append(pygame.image.load('assets/player/L6.png'))
-    self.images_left.append(pygame.image.load('assets/player/L7.png'))
-    self.images_left.append(pygame.image.load('assets/player/L8.png'))
+    i = 1
+    while i < 8:
+      self.images_right.append(pygame.image.load('assets/player/' + self.title + '/R' + str(i) + '.png'))
+      self.images_left.append(pygame.image.load('assets/player/' + self.title + '/L' + str(i) + '.png'))
+      i += 1
 
     #index value to get the image from the array, initially it is 0 
     self.index = 0
@@ -33,13 +23,23 @@ class Player(pygame.sprite.Sprite):
     self.velocity = 5 # Moving speed
     self.attack = 10
     self.all_spells = pygame.sprite.Group()
-    self.game = game
     self.health = 100
     self.max_health = 100
     self.exp = 0
     self.max_exp = 800
     self.level = 0
 
+  def swap_image(self, title):
+    self.images_right = []
+    self.images_left = []
+    i = 1
+    while i < 8:
+      self.images_right.append(pygame.image.load('assets/player/' + title + '/R' + str(i) + '.png'))
+      self.images_left.append(pygame.image.load('assets/player/' + title + '/L' + str(i) + '.png'))
+      i += 1
+
+    self.image = self.images_right[self.index]
+    
   def update_exp(self, amount):
     if self.exp >= self.max_exp:
       self.level += 1
