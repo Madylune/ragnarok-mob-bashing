@@ -1,7 +1,7 @@
 import pygame
 from components.fireball import Fireball
 from components.lightbolt import Lightbolt
-from components.coldbolt import Coldbolt
+from components.stormgust import Stormgust
 
 class Player(pygame.sprite.Sprite):
   def __init__(self, game):
@@ -88,5 +88,6 @@ class Player(pygame.sprite.Sprite):
     if element == 'wind':
       self.all_spells.add(Lightbolt(self))
     if element == 'water':
-      self.all_spells.add(Coldbolt(self))
+      if len(self.all_spells) <= 0:
+        self.all_spells.add(Stormgust(self))
     

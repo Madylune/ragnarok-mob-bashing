@@ -109,7 +109,7 @@ skill_button_light_rect = skill_button_light.get_rect()
 skill_button_light_rect.x = math.ceil(screen.get_width() / 2.5) + 50
 skill_button_light_rect.y = 10
 
-skill_button_ice = pygame.image.load('assets/cold_btn.png')
+skill_button_ice = pygame.image.load('assets/storm_btn.png')
 skill_button_ice = pygame.transform.scale(skill_button_ice, (35, 35))
 skill_button_ice_rect = skill_button_ice.get_rect()
 skill_button_ice_rect.x = math.ceil(screen.get_width() / 2.5) + 100
