@@ -114,6 +114,12 @@ skill_button_ice_rect = skill_button_ice.get_rect()
 skill_button_ice_rect.x = math.ceil(screen.get_width() / 2.5) + 100
 skill_button_ice_rect.y = 10
 
+potion_indicator = pygame.image.load('assets/potion.png')
+potion_indicator = pygame.transform.scale(potion_indicator, (42, 42))
+potion_indicator_rect = potion_indicator.get_rect()
+potion_indicator_rect.x = screen.get_width() - 120
+potion_indicator_rect.y = 10
+
 game = Game()
 game_is_running = True
 
@@ -199,6 +205,12 @@ while game_is_running:
     exp_font = pygame.font.SysFont('comicsans', 23, True)
     exp_text = exp_font.render('LV.' + str(game.player.level) + '  -  ' + game.player_title, 1, (255,255,255))
     screen.blit(exp_text, (player_avatar_rect.x + 10, player_avatar.get_height() + 15))
+
+    # Potion
+    screen.blit(potion_indicator, potion_indicator_rect)
+    potion_font = pygame.font.SysFont('comicsans', 30, True)
+    potion_text = potion_font.render('x ' + str(game.player_potions), 1, (255,255,255))
+    screen.blit(potion_text, (potion_indicator_rect.x + potion_indicator.get_width(), (potion_indicator_rect.y + potion_indicator.get_height() / 2)))
 
     game.update(screen)
     

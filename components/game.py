@@ -5,6 +5,7 @@ from components.monster import Monster
 from components.boss import Boss
 from components.bar import Bar
 from components.indicator import Indicator
+from components.potion import Potion
 
 MONSTERS_TO_KILL = 10
 
@@ -26,8 +27,18 @@ class Game:
     self.killed_boss = 0
     self.points = 0
     self.all_indicators = pygame.sprite.Group()
+    self.player_potions = 0
+    self.all_potions = pygame.sprite.Group()
     # Get pressed keys
     self.pressed = {}
+
+  def add_potion(self):
+    self.player_potions += 1
+
+  def drop_potion(self, monster, amount):
+    if amount == 1:
+      potion = Potion(self, monster.rect.x)
+      self.all_potions.add(potion)
 
   def show_indicators(self):
     indicator = Indicator(self)
@@ -110,6 +121,9 @@ class Game:
     elif self.pressed.get(pygame.K_LEFT) and self.player.rect.x > 0:
       self.player.move_left()
 
+    for potion in self.all_potions:
+      potion.drop()
+
     for indicator in self.all_indicators:
       indicator.move()
 
@@ -126,6 +140,7 @@ class Game:
       boss.update_health_bar(screen)
 
     self.player.all_spells.draw(screen)
+    self.all_potions.draw(screen)
     self.monsters_group.draw(screen)
     self.boss_group.draw(screen)
     self.all_indicators.draw(screen)

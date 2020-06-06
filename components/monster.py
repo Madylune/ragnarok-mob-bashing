@@ -206,6 +206,12 @@ class Monster(pygame.sprite.Sprite):
     self.velocity = random.randint(1, 3)
     self.health = self.max_health
 
+  def die(self):
+    self.game.drop_potion(self, random.randint(0, 1))
+    self.respawn()
+    self.game.killed_monters += 1
+    self.game.player.update_exp(self.points)
+
   def damage(self, amount, element):
     if element == self.element:
       self.health -= (amount * 2)
@@ -213,9 +219,7 @@ class Monster(pygame.sprite.Sprite):
       self.health -= amount
 
     if self.health <= 0:
-      self.respawn()
-      self.game.killed_monters += 1
-      self.game.player.update_exp(self.points)
+      self.die()
 
   def update_health_bar(self, surface):
     pygame.draw.rect(surface, (60, 63, 60), [self.rect.x + self.health_bar_rect_x, self.rect.y + self.health_bar_rect_y, self.max_health, 7])
