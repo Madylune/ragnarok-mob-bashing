@@ -35,5 +35,5 @@ class Fireball(pygame.sprite.Sprite):
       monster.damage(self.player.attack, 'fire')
 
     # Remove projectile outside
-    if self.rect.x > 800:
+    if self.rect.x > 800 or self.rect.x > (self.player.rect.x + 250):
       self.remove()

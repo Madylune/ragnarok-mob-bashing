@@ -189,18 +189,20 @@ while game_is_running:
         screen.blit(abbeye_map_3, abbeye_map_3_position) #abbeye3 - odin temple
 
     # Skills bar
-    screen.blit(skill_button_fire, skill_button_fire_rect)
-    screen.blit(skill_button_light, skill_button_light_rect)
-    screen.blit(skill_button_ice, skill_button_ice_rect)
-
     shortcuts_font = pygame.font.SysFont('comicsans', 20, True)
     
+    screen.blit(skill_button_fire, skill_button_fire_rect)
     skill_fire_text = shortcuts_font.render('(A)', 1, (255,255,255))
     screen.blit(skill_fire_text, (skill_button_fire_rect.x + 10, skill_button_fire_rect.y + 37))
+
+    screen.blit(skill_button_light, skill_button_light_rect)
     skill_light_text = shortcuts_font.render('(Z)', 1, (255,255,255))
     screen.blit(skill_light_text, (skill_button_light_rect.x + 10, skill_button_light_rect.y + 37))
-    skill_ice_text = shortcuts_font.render('(E)', 1, (255,255,255))
-    screen.blit(skill_ice_text, (skill_button_ice_rect.x + 10, skill_button_ice_rect.y + 37))
+
+    if game.player_title == 'wizard' or game.player_title == 'high wizard':
+      screen.blit(skill_button_ice, skill_button_ice_rect)
+      skill_ice_text = shortcuts_font.render('(E)', 1, (255,255,255))
+      screen.blit(skill_ice_text, (skill_button_ice_rect.x + 10, skill_button_ice_rect.y + 37))
 
     # Player infos
     screen.blit(player_avatar, player_avatar_rect)
@@ -241,7 +243,8 @@ while game_is_running:
       if event.key == pygame.K_z:
         game.player.cast_spell('wind')
       if event.key == pygame.K_e:
-        game.player.cast_spell('water')
+        if game.player_title == 'wizard' or game.player_title == 'high wizard':
+          game.player.cast_spell('water')
       if event.key == pygame.K_p:
         game.player.heal(random.randint(25, 35))
 
