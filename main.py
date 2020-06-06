@@ -119,7 +119,7 @@ potion_indicator = pygame.image.load('assets/potion.png')
 potion_indicator = pygame.transform.scale(potion_indicator, (42, 42))
 potion_indicator_rect = potion_indicator.get_rect()
 potion_indicator_rect.x = screen.get_width() - 120
-potion_indicator_rect.y = 10
+potion_indicator_rect.y = 5
 
 game = Game()
 game_is_running = True
@@ -193,12 +193,13 @@ while game_is_running:
     screen.blit(skill_button_light, skill_button_light_rect)
     screen.blit(skill_button_ice, skill_button_ice_rect)
 
-    skills_font = pygame.font.SysFont('comicsans', 20, True)
-    skill_fire_text = skills_font.render('(A)', 1, (255,255,255))
+    shortcuts_font = pygame.font.SysFont('comicsans', 20, True)
+    
+    skill_fire_text = shortcuts_font.render('(A)', 1, (255,255,255))
     screen.blit(skill_fire_text, (skill_button_fire_rect.x + 10, skill_button_fire_rect.y + 37))
-    skill_light_text = skills_font.render('(Z)', 1, (255,255,255))
+    skill_light_text = shortcuts_font.render('(Z)', 1, (255,255,255))
     screen.blit(skill_light_text, (skill_button_light_rect.x + 10, skill_button_light_rect.y + 37))
-    skill_ice_text = skills_font.render('(E)', 1, (255,255,255))
+    skill_ice_text = shortcuts_font.render('(E)', 1, (255,255,255))
     screen.blit(skill_ice_text, (skill_button_ice_rect.x + 10, skill_button_ice_rect.y + 37))
 
     # Player infos
@@ -212,6 +213,8 @@ while game_is_running:
     potion_font = pygame.font.SysFont('comicsans', 30, True)
     potion_text = potion_font.render('x ' + str(game.player_potions), 1, (255,255,255))
     screen.blit(potion_text, (potion_indicator_rect.x + potion_indicator.get_width(), (potion_indicator_rect.y + potion_indicator.get_height() / 2)))
+    potion_shortcut_text = shortcuts_font.render('(P)', 1, (255,255,255))
+    screen.blit(potion_shortcut_text, (potion_indicator_rect.x + 12, potion_indicator_rect.y + 42))
 
     game.update(screen)
     
