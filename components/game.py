@@ -68,6 +68,7 @@ class Game:
     else:
       self.killed_monters = 0
       self.killed_boss = 0
+      self.all_potions = pygame.sprite.Group()
       self.monsters_group = pygame.sprite.Group()
       self.boss_group = pygame.sprite.Group()
       self.pop_monsters()
@@ -82,6 +83,7 @@ class Game:
       self.killed_monters = 0
       self.killed_boss = 0
       self.current_level = self.levels[self.level_index]
+      self.all_potions = pygame.sprite.Group()
       self.monsters_group = pygame.sprite.Group()
       self.boss_group = pygame.sprite.Group()
       self.pop_monsters()
@@ -100,10 +102,10 @@ class Game:
 
     if self.player.level <= 1:
       self.player_title = self.player_titles[0]
-    if self.player.level > 1 and self.player.level <= 2:
+    if self.player.level > 2 and self.player.level <= 5:
       self.player_title = self.player_titles[1]
       self.player.swap_image('wizard')
-    if self.player.level > 2:
+    if self.player.level > 5:
       self.player_title = self.player_titles[2]
       self.player.swap_image('hw')
 
