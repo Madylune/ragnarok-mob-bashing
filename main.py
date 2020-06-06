@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 from components.game import Game
 
 pygame.init()
@@ -238,6 +239,8 @@ while game_is_running:
         game.player.cast_spell('wind')
       if event.key == pygame.K_e:
         game.player.cast_spell('water')
+      if event.key == pygame.K_p:
+        game.player.heal(random.randint(25, 35))
 
     elif event.type == pygame.KEYUP:
       game.pressed[event.key] = False

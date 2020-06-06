@@ -32,6 +32,10 @@ class Game:
     # Get pressed keys
     self.pressed = {}
 
+  def use_potion(self):
+    if self.player_potions > 0:
+      self.player_potions -= 1
+
   def add_potion(self):
     self.player_potions += 1
 

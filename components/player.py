@@ -53,6 +53,14 @@ class Player(pygame.sprite.Sprite):
     else:
       self.exp += amount
 
+  def heal(self, amount):
+    if self.game.player_potions >= 1:
+      self.game.use_potion()
+      if self.health + amount > self.max_health:
+        self.health = self.max_health
+      else:
+        self.health += amount
+
   def damage(self, amount):
     if self.health - amount > amount:
       self.health -= amount
