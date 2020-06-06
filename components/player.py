@@ -39,10 +39,16 @@ class Player(pygame.sprite.Sprite):
       i += 1
 
     self.image = self.images_right[self.index]
+
+  def upgrade_level(self):
+    self.level += 1
+    self.game.show_indicators()
+    level_up_sound = pygame.mixer.Sound('assets/sounds/levelup.wav')
+    pygame.mixer.Sound.play(level_up_sound)
     
   def update_exp(self, amount):
     if self.exp >= self.max_exp:
-      self.level += 1
+      self.upgrade_level()
       self.exp = 0
     else:
       self.exp += amount

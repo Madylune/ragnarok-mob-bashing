@@ -4,6 +4,7 @@ from components.player import Player
 from components.monster import Monster
 from components.boss import Boss
 from components.bar import Bar
+from components.indicator import Indicator
 
 MONSTERS_TO_KILL = 10
 
@@ -24,8 +25,13 @@ class Game:
     self.killed_monters = 0 
     self.killed_boss = 0
     self.points = 0
+    self.all_indicators = pygame.sprite.Group()
     # Get pressed keys
     self.pressed = {}
+
+  def show_indicators(self):
+    indicator = Indicator(self)
+    self.all_indicators.add(indicator)
 
   def pop_monsters(self):
     self.spawn_monster(0)
@@ -104,6 +110,9 @@ class Game:
     elif self.pressed.get(pygame.K_LEFT) and self.player.rect.x > 0:
       self.player.move_left()
 
+    for indicator in self.all_indicators:
+      indicator.move()
+
     for spell in self.player.all_spells:
       spell.move()
     
@@ -119,6 +128,7 @@ class Game:
     self.player.all_spells.draw(screen)
     self.monsters_group.draw(screen)
     self.boss_group.draw(screen)
+    self.all_indicators.draw(screen)
 
   def check_collision(self, sprite, group):
     return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
