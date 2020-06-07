@@ -28,104 +28,118 @@ class Boss(pygame.sprite.Sprite):
     self.health = 200
     self.max_health = 200
     self.velocity = 0.1
-    self.defense = 2
     
     if self.game.current_level == 'payon':
       if self.game.map_index == 1: #eddga
         self.rect.y = 260
         self.attack = 2
+        self.defense = 5
         self.health_bar_rect_x = -30
         self.health_bar_rect_y = -20
-        self.points = 200
+        self.points = 100
       if self.game.map_index == 2: #moonlight
         self.rect.y = 260
         self.attack = 3
+        self.defense = 5
         self.health_bar_rect_x = -30
         self.health_bar_rect_y = -20
-        self.points = 200
+        self.points = 100
       if self.game.map_index == 3: #baphomet
         self.rect.y = 240
         self.attack = 4
+        self.defense = 7
         self.health_bar_rect_x = -10
         self.health_bar_rect_y = -20
-        self.points = 300
+        self.points = 250
 
     if self.game.current_level == 'morroc':
       if self.game.map_index == 1: #phreeoni
         self.rect.y = 240
         self.attack = 6
+        self.defense = 5
         self.health_bar_rect_x = -20
         self.health_bar_rect_y = -20
-        self.points = 200
+        self.points = 100
       if self.game.map_index == 2: #maya
         self.rect.y = 250
         self.attack = 7
+        self.defense = 5
         self.health_bar_rect_x = -35
         self.health_bar_rect_y = -20
-        self.points = 200
+        self.points = 100
       if self.game.map_index == 3: #pharaoh
         self.rect.y = 240
         self.attack = 8
+        self.defense = 6
         self.health_bar_rect_x = -50
         self.health_bar_rect_y = -20
-        self.points = 400
+        self.points = 300
 
     if self.game.current_level == 'geffen':
       if self.game.map_index == 1: #gtb
         self.rect.y = 270
         self.attack = 9
+        self.defense = 5
         self.health_bar_rect_x = -20
         self.health_bar_rect_y = - 20
-        self.points = 200
+        self.points = 100
       if self.game.map_index == 2: #orc lord
         self.rect.y = 250
         self.attack = 10
+        self.defense = 6
         self.health_bar_rect_x = -35
         self.health_bar_rect_y = -20
-        self.points = 300
+        self.points = 200
       if self.game.map_index == 3: #dark lord
         self.rect.y = 200
         self.attack = 11
+        self.defense = 7
         self.health_bar_rect_x = -25
         self.health_bar_rect_y = -10
-        self.points = 500
+        self.points = 400
 
     if self.game.current_level == 'island':
       if self.game.map_index == 1: #octopus
         self.rect.y = 240
         self.attack = 12
+        self.defense = 7
         self.health_bar_rect_x = -20
         self.health_bar_rect_y = -20
         self.points = 400
       if self.game.map_index == 2: #drake
         self.rect.y = 240
         self.attack = 13
+        self.defense = 5
         self.health_bar_rect_x = -40
         self.health_bar_rect_y = -20
-        self.points = 300
+        self.points = 200
       if self.game.map_index == 3: #turtle general
         self.rect.y = 245
         self.attack = 14
+        self.defense = 7
         self.health_bar_rect_x = -25
         self.health_bar_rect_y = -20
-        self.points = 500
+        self.points = 400
 
     if self.game.current_level == 'yuno':
       if self.game.map_index == 1: #atroce
         self.rect.y = 250
         self.attack = 15
+        self.defense = 7
         self.health_bar_rect_x = -25
         self.health_bar_rect_y = -20
-        self.points = 600
+        self.points = 500
       if self.game.map_index == 2: #rsx
         self.rect.y = 230
         self.attack = 16
+        self.defense = 8
         self.health_bar_rect_x = -25
         self.health_bar_rect_y = -20
         self.points = 600
       if self.game.map_index == 3: #vesper
         self.rect.y = 245
         self.attack = 17
+        self.defense = 8
         self.health_bar_rect_x = -30
         self.health_bar_rect_y = -20
         self.points = 700
@@ -134,18 +148,21 @@ class Boss(pygame.sprite.Sprite):
       if self.game.map_index == 1: #detareudus
         self.rect.y = 260
         self.attack = 18
+        self.defense = 8
         self.health_bar_rect_x = -15
         self.health_bar_rect_y = -20
         self.points = 500
       if self.game.map_index == 2: #ktullanux
         self.rect.y = 230
         self.attack = 19
+        self.defense = 9
         self.health_bar_rect_x = -30
         self.health_bar_rect_y = -5
-        self.points = 700
+        self.points = 600
       if self.game.map_index == 3: #ifrit
         self.rect.y = 205
         self.attack = 20
+        self.defense = 9
         self.health_bar_rect_x = -20
         self.health_bar_rect_y = -10
         self.points = 700
@@ -154,27 +171,30 @@ class Boss(pygame.sprite.Sprite):
       if self.game.map_index == 1: #lord of the dead
         self.rect.y = 230
         self.attack = 21
+        self.defense = 5
         self.health_bar_rect_x = -15
         self.health_bar_rect_y = -25
         self.points = 200
       if self.game.map_index == 2: #fallen bishop
         self.rect.y = 250
         self.attack = 22
+        self.defense = 7
         self.health_bar_rect_x = -40
         self.health_bar_rect_y = -5
-        self.points = 600
+        self.points = 400
       if self.game.map_index == 3: #valkyrie
         self.rect.y = 240
         self.attack = 23
+        self.defense = 8
         self.health_bar_rect_x = 0
         self.health_bar_rect_y = -10
-        self.points = 800
+        self.points = 500
 
   def die(self):
     self.game.boss_group.remove(self)
 
   def damage(self, amount, element):
-    self.health -= (amount / self.defense)
+    self.health -= (amount - self.defense)
 
     if self.health <= 0:
       self.game.killed_boss += 1
